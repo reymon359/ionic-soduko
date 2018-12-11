@@ -6,14 +6,14 @@
       <div class="menu-col "> SHARE</div>
     </div>
     <div class="menu-row middle-row">
-      <div class="menu-col "> PROFILE </div>
-      <div class="menu-col middle-col"> PLAY </div>
-      <div class="menu-col t">OPTION</div>
+      <div [navPush]="profilePage" class="menu-col "> PROFILE </div>
+      <div [navPush]="gamePage" class="menu-col middle-col"> PLAY </div>
+      <div [navPush]="rulesPage"class="menu-col t">RULES</div>
     </div>
     <div class="menu-row">
       <div class="menu-col ">OPTION</div>
       <div class="menu-col middle-col">OPTION</div>
-      <div class="menu-col ">OPTION</div>
+      <div [navPush]="creditsPage" class="menu-col ">CREDITS</div>
     </div>
   </div>
 </ion-content>
