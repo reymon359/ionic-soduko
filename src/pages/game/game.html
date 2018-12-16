@@ -1,14 +1,14 @@
 <ion-content padding>
   <ion-icon navPop left name="arrow-round-back"></ion-icon>
-
-  <div class="board">
+{{this.game.time}}
+  <!-- <div class="board">
     <div class="row" *ngFor="let row of this.game.boardSolution; let i =index">
-      <div class="box" *ngFor="let column of this.game.boardSolution[i];let j = index">
+      <div class="box" *ngFor="let column of this.game.boardSolutio[i];let j = index">
         <div class="insidebox" [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
           {{table[i][j]}}
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </ion-content>
