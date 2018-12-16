@@ -10,7 +10,7 @@ import {
   HomePage, GamePage, ProfilePage, RulesPage, CreditsPage
 } from '../pages/index.pages';
 //providers
-import { GameProvider } from '../providers/index.providers';
+import { GameProvider, UsefulProvider, UserProvider } from '../providers/index.providers';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { GameProvider } from '../providers/index.providers';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    GameProvider
+    GameProvider, UsefulProvider, UserProvider,
   ]
 })
 export class AppModule { }

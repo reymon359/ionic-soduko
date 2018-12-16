@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 //models
 import { Game } from "../../models/index.models";
 // //providers
+import { UsefulProvider } from "../useful/useful";
 
 @Injectable()
 export class GameProvider {
@@ -29,7 +30,7 @@ export class GameProvider {
     moves: 0,
     time: 0
   }
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private usefulProv: UsefulProvider) {
     console.log('Hello GameProvider Provider');
   }
 
@@ -50,6 +51,6 @@ export class GameProvider {
         }
       }
     }
-    // return this.usefulProv.shuffleArray(board);
+    return this.usefulProv.shuffleArray(board);
   }
 }
