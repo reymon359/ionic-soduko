@@ -35,10 +35,7 @@ export class GamePage {
     moves: 0,
     time: 0
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv:UsefulProvider) {
-    console.log(this.navParams.get('dificulty'));
-    this.game.dificulty=this.navParams.get('dificulty');
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider) {
     console.log("enters gamepage")
   }
 
@@ -46,7 +43,9 @@ export class GamePage {
     console.log('ionViewDidLoad GamePage');
   }
   createNewGame() {
-    console.log(this.newBoard());
+    this.game.token = this.usefulProv.generateToken();
+    this.game.state = "started";
+    this.game.dificulty = this.navParams.get('dificulty');
     this.game.boardSolution = this.newBoard();
     this.game.boardHistory[0] = this.newBoard();
     console.log(this.game);
