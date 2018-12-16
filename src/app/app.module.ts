@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+
+import { HttpClientModule } from '@angular/common/http';
+
 //pages
 import {
   HomePage, GamePage, ProfilePage, RulesPage, CreditsPage
@@ -19,7 +22,8 @@ import { GameProvider, UsefulProvider, UserProvider } from '../providers/index.p
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,7 +34,7 @@ import { GameProvider, UsefulProvider, UserProvider } from '../providers/index.p
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    GameProvider, UsefulProvider, UserProvider,
+    GameProvider, UsefulProvider, UserProvider
   ]
 })
 export class AppModule { }

@@ -35,12 +35,16 @@ export class GameProvider {
   }
 
   createNewGame() {
-
+    console.log(this.newBoard());
+    this.game.boardSolution = this.newBoard();
+    this.game.boardHistory[0] = this.newBoard();
+    console.log(this.game);
+    return this.game;
   }
 
   newBoard() {
     let board = this.boardBase;
-    var random10 = Math.floor((Math.random() * 10) + 1);
+    let random10 = Math.floor((Math.random() * 10) + 1);
     for (let r = 0; r < random10; r++) {
       for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {

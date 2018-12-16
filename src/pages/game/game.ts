@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+// Providers
+import { GameProvider } from "../../providers/index.providers";
+// models
+import { Game } from "../../models/index.models";
 
 @IonicPage()
 @Component({
@@ -8,45 +11,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'game.html',
 })
 export class GamePage {
-  title = 'app';
-  table: any[] = [];
-  table2: any[] = [];
-  numbers: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  baseBoard: any[] = [
-    [2, 8, 6, 7, 5, 4, 9, 3, 1],
-    [9, 3, 1, 2, 8, 6, 7, 5, 4],
-    [7, 5, 4, 9, 1, 3, 8, 6, 2],
-    [8, 9, 2, 6, 7, 5, 4, 1, 3],
-    [6, 7, 5, 4, 3, 1, 2, 9, 8],
-    [4, 1, 3, 8, 9, 2, 6, 7, 5],
-    [5, 6, 9, 3, 4, 8, 1, 2, 7],
-    [3, 4, 7, 1, 2, 9, 5, 8, 6],
-    [1, 2, 8, 5, 6, 7, 3, 4, 9]
-  ];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-console.log("enters gamepage")
+  public game: Game = {
+    token: "",
+    state: "",
+    dateStart: null,
+    datePaused: null,
+    dateEnded: null,
+    boardSolution: [],
+    boardActual: [],
+    boardHistory: [],
+    moves: 0,
+    time: 0
+  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider) {7
+
+    console.log("enters gamepage")
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
-    this.generateTablero2();
+    this.game = this.gameProv.createNewGame();
+  }
+  ionViewWillEnter(){
+
   }
 
-  generateTablero2() {
-    this.table = this.baseBoard;
-    var random10 = Math.floor((Math.random() * 10) + 1);
-    for (let r = 0; r < random10; r++) {
-      for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
-          this.table[i][j] = this.table[i][j] + 1;
-          if (this.table[i][j] == 10) {
-            this.table[i][j] = 1;
-          }
-        }
-      }
-    }
-    this.table = this.shuffleArray(this.table);
-  }
   // generateTablero() {
   //   for (let r = 0; r < 9; r++) {
   //     this.table[r] = new Array(9);
