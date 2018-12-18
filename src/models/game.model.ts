@@ -2,7 +2,7 @@ export class Game {
   constructor(
     public token: string,
     public state: string,
-    public dificulty: string,
+    public difficulty: string,
     public dateStart: Date,
     public datePaused: Date,
     public dateEnded: Date,

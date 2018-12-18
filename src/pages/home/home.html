@@ -2,12 +2,12 @@
   <div class="main-menu">
     <div class="menu-row">
       <div class="menu-col ">OPTION</div>
-      <div (click)="changeDificulty()" class="menu-col middle-col">{{dificulty}}</div>
+      <div (click)="changeDifficulty()" class="menu-col middle-col">{{difficulty}}</div>
       <div class="menu-col "> SHARE</div>
     </div>
     <div class="menu-row middle-row">
       <div [navPush]="profilePage" class="menu-col "> PROFILE </div>
-      <div [navPush]="gamePage" [navParams]="{dificulty:dificulty}" class="menu-col middle-col"> PLAY </div>
+      <div [navPush]="gamePage" [navParams]="{difficulty:difficulty}" class="menu-col middle-col"> PLAY </div>
       <div [navPush]="rulesPage"class="menu-col t">RULES</div>
     </div>
     <div class="menu-row">
