@@ -12,16 +12,13 @@ export class HomePage {
   profilePage = ProfilePage;
   rulesPage = RulesPage;
 
-  difficulty: string = 'EASY'; // TODO: Save difficulty chosen in localstorage
-  arrayDificulties: string[] = ['EASY', 'NORMAL', 'HARD'];
+  difficulty: number = 0; // TODO: Save difficulty chosen in localstorage
+  arrayDificulties: string[] = ['BEGINNER','EASY', 'NORMAL', 'HARD','EXTREME'];
   constructor(public navCtrl: NavController) {
 
   }
   changeDifficulty() {
-    let newDifficulty = this.arrayDificulties[this.arrayDificulties.indexOf(this.difficulty) + 1];
-    if (newDifficulty === undefined) {
-      newDifficulty = this.arrayDificulties[0];
-    }
-    this.difficulty = newDifficulty;
+    this.difficulty ++;
+    if (this.difficulty === 5)   this.difficulty = 0;
   }
 }

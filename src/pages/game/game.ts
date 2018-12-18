@@ -25,7 +25,7 @@ export class GamePage {
   public game: Game = {
     token: "",
     state: "",
-    difficulty: "",
+    difficulty: 0,
     dateStart: null,
     datePaused: null,
     dateEnded: null,
@@ -81,55 +81,45 @@ export class GamePage {
       this.game.time = this.game.time + 1;
     }, 1000);
   }
-//   function randomIntFromInterval(min, max) // min and max included
-// {
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// }
-// Now i am going to apply the difficulty chosen in the homepage that ai got with the params.
-// I will go ver the gameBoard positions and deleting x number of values depending on the difficulty.
-applyDifficulty() {
-  let min, max;
-  switch (this.game.difficulty) {
-    case 'EASY':
-      min = 1; max = 3;
-      break;
-    case 'NORMAL':
-      min = 3; max = 5;
-      break;
-    case 'HARD':
-      min = 4; max = 6;
-      break;
+  //   function randomIntFromInterval(min, max) // min and max included
+  // {
+  //   return Math.floor(Math.random() * (max - min + 1) + min);
+  // }
+  // Now i am going to apply the difficulty chosen in the homepage that ai got with the params.
+  // I will go ver the gameBoard positions and deleting x number of values depending on the difficulty.
+  applyDifficulty() {
+    let min = this.game.difficulty;
+    let max = min + 2;
+    this.gameBoard.forEach((row) => {
+      let toReplace = this.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+      for (let i = 0; i < Math.floor(Math.random() * (max - min + 1) + min); i++) {
+        row[toReplace[i]] = '';
+      }
+    })
   }
-  this.gameBoard.forEach((row) => {
-    let toReplace = this.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
-    for (let i = 0; i < Math.floor(Math.random() * (max - min + 1) + min); i++) {
-      row[toReplace[i]] = '';
+
+
+  // =================
+  // USEFUL FUNCTIONS
+  // =================
+
+  // To shuffle the elements inside an array
+  shuffleArray(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    // While there remain elements to shuffle inside the array
+    while (0 !== currentIndex) {
+      // Pick a remaining element from the array
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      // randomIndex is a random number between 0 and the array position
+      currentIndex -= 1;
+      // We get a new currentIndex and swap it with the current element.
+      temporaryValue = array[currentIndex];
+      // We save the currentIndex value in temporaryValue
+      array[currentIndex] = array[randomIndex];
+      // Now we fill the new currentIndex position with the value from the randomIndex
+      array[randomIndex] = temporaryValue;
+      // Lastly in the randomIndex position we put the temporaryValue we saved before
     }
-  })
-}
-
-
-// =================
-// USEFUL FUNCTIONS
-// =================
-
-// To shuffle the elements inside an array
-shuffleArray(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
-  // While there remain elements to shuffle inside the array
-  while (0 !== currentIndex) {
-    // Pick a remaining element from the array
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    // randomIndex is a random number between 0 and the array position
-    currentIndex -= 1;
-    // We get a new currentIndex and swap it with the current element.
-    temporaryValue = array[currentIndex];
-    // We save the currentIndex value in temporaryValue
-    array[currentIndex] = array[randomIndex];
-    // Now we fill the new currentIndex position with the value from the randomIndex
-    array[randomIndex] = temporaryValue;
-    // Lastly in the randomIndex position we put the temporaryValue we saved before
+    return array;
   }
-  return array;
-}
 }
