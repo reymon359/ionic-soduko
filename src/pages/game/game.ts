@@ -35,6 +35,7 @@ export class GamePage {
     moves: 0,
     time: 0
   }
+  gameBoard: any[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider) {
     console.log("enters gamepage")
     this.createNewGame();
@@ -42,17 +43,21 @@ export class GamePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
+    this.startGame();
   }
   createNewGame() {
+    let newBoard = this.newBoard();
     this.game.token = this.usefulProv.generateToken();
     this.game.state = "started";
     this.game.dificulty = this.navParams.get('dificulty');
     this.game.dateStart = this.usefulProv.getDate(new Date());
-    this.game.boardSolution = this.newBoard();
-    this.game.boardHistory[0] = this.newBoard();
-    this.StartTime();
+    this.game.boardSolution = newBoard;
+    this.game.boardHistory[0] = newBoard;
     console.log(this.game);
-
+    this.gameBoard = newBoard;
+  }
+  startGame() {
+    this.StartTime();
   }
 
   newBoard() {
@@ -71,11 +76,9 @@ export class GamePage {
     return this.usefulProv.shuffleArray(board);
   }
   StartTime() {
-    let timer = setInterval(
-      () => {
-        this.game.time = this.game.time + 1;
-      }
-      , 1000);
+    let timer = setInterval(() => {
+      this.game.time = this.game.time + 1;
+    }, 1000);
   }
 
 
