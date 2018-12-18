@@ -13,6 +13,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 //--------------HOME
+
 .main-menu {
   margin: 50% auto;
   height: 50%;
@@ -43,10 +44,9 @@
   border-right: 1px solid #000;
 }
 //--------------GAME
+
 .board {
-  margin: 20% auto;
-  height: 50%;
-  padding: 10px;
+  margin-top: 5%;
   text-align: center;
   // width: 90%;
   // max-width: 400px;
@@ -75,4 +75,16 @@
 
 .border-bottom {
   border-bottom: 2px solid;
+}
+
+.numberContainer {
+  // background-color: black;
+}
+
+.numberSelect {
+  font-size: 16px;
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  padding: 1.2em;
 }

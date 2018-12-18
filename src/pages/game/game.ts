@@ -36,8 +36,12 @@ export class GamePage {
     time: 0
   }
   gameBoard: any[] = [];
+  numbers = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider) {
     console.log("enters gamepage")
+    this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
+    // this.numbers = Array(5).fill(4); // [4,4,4,4,4]
+    console.log(this.numbers);
     this.createNewGame();
   }
 
@@ -52,10 +56,16 @@ export class GamePage {
     this.game.difficulty = this.navParams.get('difficulty');
     this.game.dateStart = this.usefulProv.getDate(new Date());
     this.game.boardSolution = newBoard;
-    this.game.boardHistory[0] = newBoard;
     console.log(this.game);
     this.gameBoard = newBoard;
     this.applyDifficulty();
+    this.updateBoardHistory();
+
+  }
+  updateBoardHistory() {
+    let boardToUpdate = this.gameBoard;
+    let newPos = this.updateBoardHistory.length;
+    this.game.boardHistory[newPos] = boardToUpdate;
   }
   startGame() {
     this.StartTime();

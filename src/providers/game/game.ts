@@ -21,6 +21,7 @@ export class GameProvider {
   public game: Game = {
     token: "",
     state: "",
+    difficulty:0,
     dateStart: null,
     datePaused: null,
     dateEnded: null,
@@ -34,27 +35,27 @@ export class GameProvider {
     console.log('Hello GameProvider Provider');
   }
 
-  createNewGame() {
-    console.log(this.newBoard());
-    this.game.boardSolution = this.newBoard();
-    this.game.boardHistory[0] = this.newBoard();
-    console.log(this.game);
-    return this.game;
-  }
+  // createNewGame() {
+  //   console.log(this.newBoard());
+  //   this.game.boardSolution = this.newBoard();
+  //   this.game.boardHistory[0] = this.newBoard();
+  //   console.log(this.game);
+  //   return this.game;
+  // }
 
-  newBoard() {
-    let board = this.boardBase;
-    let random10 = Math.floor((Math.random() * 10) + 1);
-    for (let r = 0; r < random10; r++) {
-      for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
-          board[i][j] = board[i][j] + 1;
-          if (board[i][j] == 10) {
-            board[i][j] = 1;
-          }
-        }
-      }
-    }
-    return this.usefulProv.shuffleArray(board);
-  }
+  // newBoard() {
+  //   let board = this.boardBase;
+  //   let random10 = Math.floor((Math.random() * 10) + 1);
+  //   for (let r = 0; r < random10; r++) {
+  //     for (let i = 0; i < 9; i++) {
+  //       for (let j = 0; j < 9; j++) {
+  //         board[i][j] = board[i][j] + 1;
+  //         if (board[i][j] == 10) {
+  //           board[i][j] = 1;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return this.usefulProv.shuffleArray(board);
+  // }
 }
