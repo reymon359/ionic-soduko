@@ -1,6 +1,7 @@
 <ion-content padding>
   <ion-icon navPop left name="arrow-round-back"></ion-icon>
 {{this.game.time}}
+<div class="game">
   <div class="board">
     <div class="row" *ngFor="let row of gameBoard; let i =index">
       <div class="box"  *ngFor="let column of gameBoard[i];let j = index" (click)="selectBox(i,j)"  [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
@@ -11,6 +12,12 @@
     </div>
   </div>
 <div class="numberContainer">
-  <div class="numberSelect" *ngFor="let number of numbers">{{number}}</div>
+  <div  class="numberSelect" *ngFor="let number of numbers"  (click)="putNumber(number)">
+    <div class="number">
+      {{number}}
+    </div>
+  </div>
 </div>
+</div>
+
 </ion-content>

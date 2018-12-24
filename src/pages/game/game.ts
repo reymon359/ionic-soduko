@@ -37,7 +37,7 @@ export class GamePage {
   }
   gameBoard: any[] = [];
   numbers = [];
-  boxSelected = [];
+  boxSelected = [null,null];
   constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider) {
     console.log("enters gamepage")
     this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
@@ -119,6 +119,15 @@ export class GamePage {
       insideBoxSelected.classList.add("selected");
     }
   }
+
+  putNumber(number){
+    if (this.boxSelected!=[null,null]) {
+
+    }
+
+
+  }
+
 
   // =================
   // USEFUL FUNCTIONS
