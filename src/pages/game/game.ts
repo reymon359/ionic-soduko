@@ -37,7 +37,7 @@ export class GamePage {
   }
   gameBoard: any[] = [];
   numbers = [];
-  boxSelected = [null,null];
+  boxSelected = [null, null];
   constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider) {
     console.log("enters gamepage")
     this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
@@ -63,10 +63,18 @@ export class GamePage {
     this.updateBoardHistory();
 
   }
+  getBoard(board) {
+    let aux = board;
+    return aux;
+
+  }
   updateBoardHistory() {
-    let boardToUpdate = this.gameBoard;
-    let newPos = this.updateBoardHistory.length;
+    let aux =  this.gameBoard;
+    let myJSON = JSON.stringify(aux);
+    let boardToUpdate = JSON.parse(myJSON);
+    let newPos = this.game.boardHistory.length;
     this.game.boardHistory[newPos] = boardToUpdate;
+    console.log(this.game.boardHistory);
   }
   startGame() {
     this.StartTime();
@@ -120,12 +128,22 @@ export class GamePage {
     }
   }
 
-  putNumber(number){
-    if (this.boxSelected!=[null,null]) {
+  putNumber(number) {
+    let row = this.boxSelected[0];
+    let col = this.boxSelected[1];
+    if (this.boxSelected != [null, null]) {
+      // We save the actual board in the history board next position
+      if (number == 0) {
+        this.gameBoard[row][col] = '';
+
+      } else {
+        this.gameBoard[row][col] = number;
+
+      }
+
+      this.updateBoardHistory();
 
     }
-
-
   }
 
 
@@ -151,5 +169,11 @@ export class GamePage {
       // Lastly in the randomIndex position we put the temporaryValue we saved before
     }
     return array;
+  }
+}
+
+class Board {
+  constructor(board) {
+    return board;
   }
 }

@@ -104,12 +104,13 @@
   display: inline-block;
   width: 20%;
   text-align: center;
-  padding: 1em;
+  padding: .5em;
+      max-height: 60px;
 }
 
 .number {
   cursor: pointer;
   background-color: #eee;
-  padding: 0.7em;
+  padding: 1em;
   border-radius: 50%;
 }

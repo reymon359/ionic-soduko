@@ -1,23 +1,23 @@
 <ion-content padding>
   <ion-icon navPop left name="arrow-round-back"></ion-icon>
-{{this.game.time}}
-<div class="game">
-  <div class="board">
-    <div class="row" *ngFor="let row of gameBoard; let i =index">
-      <div class="box"  *ngFor="let column of gameBoard[i];let j = index" (click)="selectBox(i,j)"  [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
-        <div  class="insidebox" id="{{ 'box-' + i+j }}" [ngClass]="{ 'fixed': gameBoard[i][j]!=''}">
-          <div >{{gameBoard[i][j]}}</div>
+  {{this.game.time}}
+  <div class="game">
+    <div class="board">
+      <div class="row" *ngFor="let row of gameBoard; let i =index">
+        <div class="box" *ngFor="let column of gameBoard[i];let j = index" (click)="selectBox(i,j)" [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
+          <div class="insidebox" id="{{ 'box-' + i+j }}" [ngClass]="{ 'fixed': (gameBoard[i][j]==this.game.boardHistory[0][i][j]) && (gameBoard[i][j]!='') }">
+            <div>{{gameBoard[i][j]}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="numberContainer">
+      <div class="numberSelect" *ngFor="let number of numbers" (click)="putNumber(number)">
+        <div class="number">
+          {{number}}
         </div>
       </div>
     </div>
   </div>
-<div class="numberContainer">
-  <div  class="numberSelect" *ngFor="let number of numbers"  (click)="putNumber(number)">
-    <div class="number">
-      {{number}}
-    </div>
-  </div>
-</div>
-</div>
 
 </ion-content>
