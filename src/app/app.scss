@@ -67,6 +67,7 @@
 .insidebox {
   height: 100%;
   padding: 30%;
+  border-radius: 50%;
 }
 
 .border-right {
@@ -87,4 +88,10 @@
   width: 20%;
   text-align: center;
   padding: 1.2em;
+}
+.fixed{
+  background-color: lightgrey;
+}
+.selected{
+  border: 1px solid;
 }

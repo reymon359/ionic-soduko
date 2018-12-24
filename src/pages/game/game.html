@@ -3,9 +3,9 @@
 {{this.game.time}}
   <div class="board">
     <div class="row" *ngFor="let row of gameBoard; let i =index">
-      <div class="box" *ngFor="let column of gameBoard[i];let j = index">
-        <div class="insidebox" [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
-          {{gameBoard[i][j]}}
+      <div class="box"  *ngFor="let column of gameBoard[i];let j = index" (click)="selectBox(i,j)"  [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
+        <div  class="insidebox" id="{{ 'box-' + i+j }}" [ngClass]="{ 'fixed': gameBoard[i][j]!=''}">
+          <div >{{gameBoard[i][j]}}</div>
         </div>
       </div>
     </div>

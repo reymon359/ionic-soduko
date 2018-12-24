@@ -37,6 +37,7 @@ export class GamePage {
   }
   gameBoard: any[] = [];
   numbers = [];
+  boxSelected = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider) {
     console.log("enters gamepage")
     this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
@@ -108,6 +109,16 @@ export class GamePage {
     })
   }
 
+  selectBox(row, col) {
+    this.boxSelected = [row, col];
+    let insideBoxSelected = document.getElementById('box-' + row + col);
+    if (!insideBoxSelected.classList.contains('fixed')) {
+      if (document.getElementsByClassName('selected').length > 0) {
+        document.getElementsByClassName('selected')[0].classList.remove('selected');
+      }
+      insideBoxSelected.classList.add("selected");
+    }
+  }
 
   // =================
   // USEFUL FUNCTIONS
