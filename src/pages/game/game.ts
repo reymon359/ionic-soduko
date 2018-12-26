@@ -176,28 +176,37 @@ export class GamePage {
   }
 
   // -------------MODAL------------
-  modal(aux) {
+  // PARAMS
+  // - Type: The type of the modal.
+  //    - default: Just clocse modal.
+  //    - choose: Confirm/Cancel.
+  //    - multiple: Multiple options.
+  // - Title: The modal title.
+  // - Text: The modal text.
+  // - Color: The modal colour.
+  //    - default: Grey.
+  //    - success: green.
+  //    - warning: yellow.
+  //    - error: red.
+  modal( title = 'Title', text = 'text',type = 'default', color = 'default') {
+    console.log(title,text,type,color);
     let modalBack = document.createElement('div'),
       modal = document.createElement('div'),
       html = '';
     modalBack.appendChild(modal);
 
-    //comentario subido correctamente
-    if (aux == 'prueba') {
-      html +=
-        '<h2>Comentario subido correctamente</h2>';
-      html +=
-        '<p> El comentario se ha guardado correctamente, por favor refresque la pagina para visualizarlo </p>';
-      html +=
-        '<button id="boton" onclick="this.parentNode.parentNode.remove();">Cerrar</button>';
-    }
+    html +=
+      '<h2>' + title + '</h2>';
+    html +=
+      '<p>' + text + '</p>';
 
-    //le añadimos el html a la capa del mensaje
+    html +=
+      '<button id="modalButton" onclick="this.parentNode.parentNode.remove();">Close</button>';
     modal.innerHTML = html;
-    modalBack.classList.add('modal-back'); // le ponemos clase para darle estilo luego
+    modalBack.classList.add('modal-back');
     modal.classList.add('modal');
-    document.body.appendChild(modalBack); // le ponemos al body la capa de fondo como hijo
-    document.getElementById('boton').focus();
+    document.body.appendChild(modalBack);
+    document.getElementById('modalButton').focus();
 
   }
 }
