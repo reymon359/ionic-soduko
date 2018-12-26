@@ -155,7 +155,7 @@ export class GamePage {
   // USEFUL FUNCTIONS
   // =================
 
-  // To shuffle the elements inside an array
+  // -------SHUFFLE ARRAY------------
   shuffleArray(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
     // While there remain elements to shuffle inside the array
@@ -174,10 +174,30 @@ export class GamePage {
     }
     return array;
   }
-}
 
-class Board {
-  constructor(board) {
-    return board;
+  // -------------MODAL------------
+  modal(aux) {
+    let modalBack = document.createElement('div'),
+      modal = document.createElement('div'),
+      html = '';
+    modalBack.appendChild(modal);
+
+    //comentario subido correctamente
+    if (aux == 'prueba') {
+      html +=
+        '<h2>Comentario subido correctamente</h2>';
+      html +=
+        '<p> El comentario se ha guardado correctamente, por favor refresque la pagina para visualizarlo </p>';
+      html +=
+        '<button id="boton" onclick="this.parentNode.parentNode.remove();">Cerrar</button>';
+    }
+
+    //le añadimos el html a la capa del mensaje
+    modal.innerHTML = html;
+    modalBack.classList.add('modal-back'); // le ponemos clase para darle estilo luego
+    modal.classList.add('modal');
+    document.body.appendChild(modalBack); // le ponemos al body la capa de fondo como hijo
+    document.getElementById('boton').focus();
+
   }
 }

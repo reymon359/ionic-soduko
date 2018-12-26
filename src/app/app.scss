@@ -143,3 +143,49 @@
   margin: 2%;
   text-align: center;
 }
+// ----------------------
+// -----MODAL------------
+// ----------------------
+.modal-back {
+  background-color: rgba(255, 255, 255, .7);
+  position: absolute;
+  height: 3000px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal {
+  position: fixed;
+  width: 20em;
+  border: .05em solid #234;
+  border-radius: .1em;
+  border-color: #A2A2A2;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  top: 10em;
+  left: 50%;
+  transform: translate(-50%);
+  text-align: center;
+  background-color: #fff;
+}
+
+.modal>h2 {
+  margin: 0;
+  padding: .2em;
+  background-color: #4FB050;
+  color: #fff;
+}
+
+.aviso {
+  background-color: red;
+  color: white;
+}
+
+.verde {
+  color: rgb(75, 191, 57);
+}
+
+.rojo {
+  color: rgb(240, 16, 16);
+}
