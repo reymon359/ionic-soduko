@@ -69,7 +69,7 @@ export class GamePage {
 
   }
   updateBoardHistory() {
-    let aux =  this.gameBoard;
+    let aux = this.gameBoard;
     let myJSON = JSON.stringify(aux);
     let boardToUpdate = JSON.parse(myJSON);
     let newPos = this.game.boardHistory.length;
@@ -118,9 +118,11 @@ export class GamePage {
   }
 
   selectBox(row, col) {
-    this.boxSelected = [row, col];
+    // Check if the place to put the number is diferent than the history board [0]
+
     let insideBoxSelected = document.getElementById('box-' + row + col);
     if (!insideBoxSelected.classList.contains('fixed')) {
+      this.boxSelected = [row, col];
       if (document.getElementsByClassName('selected').length > 0) {
         document.getElementsByClassName('selected')[0].classList.remove('selected');
       }
@@ -129,20 +131,22 @@ export class GamePage {
   }
 
   putNumber(number) {
-    let row = this.boxSelected[0];
-    let col = this.boxSelected[1];
-    if (this.boxSelected != [null, null]) {
-      // We save the actual board in the history board next position
-      if (number == 0) {
-        this.gameBoard[row][col] = '';
+    if (document.getElementsByClassName('selected').length > 0) {
+      let row = this.boxSelected[0];
+      let col = this.boxSelected[1];
 
-      } else {
-        this.gameBoard[row][col] = number;
-
+      if (this.boxSelected != [null, null]) {
+        // We save the actual board in the history board next position
+        if (number == 0) {
+          this.gameBoard[row][col] = '';
+        } else {
+          this.gameBoard[row][col] = number;
+        }
+        this.updateBoardHistory();
+        if (document.getElementsByClassName('selected').length > 0) {
+          document.getElementsByClassName('selected')[0].classList.remove('selected');
+        }
       }
-
-      this.updateBoardHistory();
-
     }
   }
 
