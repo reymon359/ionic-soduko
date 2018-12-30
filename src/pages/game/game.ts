@@ -52,13 +52,16 @@ export class GamePage {
     console.log('ionViewDidLoad GamePage');
   }
   createNewGame() {
-    let newBoard = this.newBoard();
+    // let newBoard = this.newBoard();
+    let aux = this.newBoard();
+    this.game.boardSolution = aux;
+    let myJSON = JSON.stringify(aux);
+    let newBoard = JSON.parse(myJSON);
+    console.log(newBoard);
     this.game.token = this.usefulProv.generateToken();
     this.game.state = "started";
     this.game.difficulty = this.navParams.get('difficulty');
     this.game.dateStart = this.usefulProv.getDate(new Date());
-    this.game.boardSolution = newBoard;
-    console.log(this.game);
     this.gameBoard = newBoard;
     this.applyDifficulty();
     this.updateBoardHistory();
@@ -80,7 +83,17 @@ export class GamePage {
   }
 
   newBoard() {
-    let board = this.boardBase;
+    let board = [
+      [2, 8, 6, 7, 5, 4, 9, 3, 1],
+      [9, 3, 1, 2, 8, 6, 7, 5, 4],
+      [7, 5, 4, 9, 1, 3, 8, 6, 2],
+      [8, 9, 2, 6, 7, 5, 4, 1, 3],
+      [6, 7, 5, 4, 3, 1, 2, 9, 8],
+      [4, 1, 3, 8, 9, 2, 6, 7, 5],
+      [5, 6, 9, 3, 4, 8, 1, 2, 7],
+      [3, 4, 7, 1, 2, 9, 5, 8, 6],
+      [1, 2, 8, 5, 6, 7, 3, 4, 9]
+    ];
     let random10 = Math.floor((Math.random() * 10) + 1);
     for (let r = 0; r < random10; r++) {
       for (let i = 0; i < 9; i++) {
@@ -123,6 +136,7 @@ export class GamePage {
   }
 
   putNumber(number) {
+
     if (document.getElementsByClassName('selected').length > 0) {
       let row = this.boxSelected[0];
       let col = this.boxSelected[1];
@@ -151,21 +165,31 @@ export class GamePage {
   }
 
   checkWin() {
-    if (this.gameBoard == this.game.boardSolution) {
-      this.timeRunning = false;
-      let alert = this.alertCtrl.create({
-        title: 'CONGRATULATIONS',
-        message: `You just won this ${this.arrayDificulties[this.game.difficulty]} game in ${this.game.time} secs !!`,
-        buttons: [{
-          text: 'Ok',
-          handler: () => {
-            this.navCtrl.pop();
+    let win = true;
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+          if(this.gameBoard[i][j] !== this.game.boardSolution[i][j]){
+            win=false;
           }
-        }]
-      });
-      alert.present();
+      }
     }
+      if (win) {
+        this.timeRunning = false;
+        let alert = this.alertCtrl.create({
+          title: 'CONGRATULATIONS',
+          message: `You just won this ${this.arrayDificulties[this.game.difficulty]} game in ${this.game.time} secs !!`,
+          buttons: [{
+            text: 'Ok',
+            handler: () => {
+              this.navCtrl.pop();
+            }
+          }]
+        });
+        alert.present();
+      }
   }
+
+
 
   // Bottom buttons ----------------
 
@@ -225,7 +249,6 @@ export class GamePage {
   timeController() {
     let timer = setInterval(() => {
       if (this.timeRunning) {
-        console.log('otro segundo');
         this.game.time = this.game.time + 1;
       }
     }, 1000);
