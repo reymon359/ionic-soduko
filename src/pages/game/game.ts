@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 // Providers
 import { UsefulProvider } from "../../providers/index.providers";
 // models
@@ -38,7 +38,7 @@ export class GamePage {
   gameBoard: any[] = [];
   numbers = [];
   boxSelected = [null, null];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
     console.log("enters gamepage")
     this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
     // this.numbers = Array(5).fill(4); // [4,4,4,4,4]
@@ -145,20 +145,63 @@ export class GamePage {
           document.getElementsByClassName('selected')[0].classList.remove('selected');
         }
       }
-    }else{
-      this.modal('Wait', `Select before where you want to put the ${number}`);
+    } else {
+      let alert = this.alertCtrl.create({
+        title: 'Wait',
+        message: `Select before where you want to put the ${number}`,
+        buttons: ['Ok']
+      });
+      alert.present();
     }
   }
 
-  // =================
-  // Extra Functions
-  // =================
-  goBack(){
-    // if cant , modal you cant go more back
+  // Go back to last move
+  goBack() {
+    if (this.game.boardHistory.length > 1) {
+      this.game.boardHistory.splice(-1, 1);
+      this.gameBoard = this.game.boardHistory[this.game.boardHistory.length - 1];
+    } else {
+      // if cant , modal you cant go more back
+      let alert = this.alertCtrl.create({
+        title: 'You went all the way back',
+        message: 'Next time you should use the restart button',
+        buttons: ['Ok']
+      });
+      alert.present();
+    }
+  }
 
-
-
-    this.updateBoardHistory();
+  restartBoard() {
+    if (this.game.boardHistory.length > 1) {
+      let alert = this.alertCtrl.create({
+        title: 'You will restart the board',
+        message: 'Are you sure?',
+        buttons: [
+          {
+            text: 'Confirm',
+            handler: () => {
+              console.log('restarting board');
+              console.log(this.game.boardHistory.shift());
+              this.gameBoard=this.game.boardHistory.shift();
+              this.game.boardHistory=[];
+              this.updateBoardHistory();
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          }
+        ]
+      });
+      alert.present();
+    } else {
+      let alert = this.alertCtrl.create({
+      title: 'Impossible',
+      message: 'The board is already like when you started',
+      buttons: ['Ok']
+    });
+    alert.present();
+}
 
   }
 
@@ -204,19 +247,27 @@ export class GamePage {
   //    - success: green.
   //    - warning: yellow.
   //    - error: red.
-  modal( title = 'Title', text = 'text', type = 'default', color = 'default') {
-    console.log(title,text,type,color);
+  modal(title = 'Title', text = 'text', type = 'default', color = 'default') {
+    console.log(title, text, type, color);
     let modalBack = document.createElement('div'),
       modal = document.createElement('div'),
       html = '';
     modalBack.appendChild(modal);
 
-    html +=
-      '<h2>' + title + '</h2>';
-    html +=
-      '<p>' + text + '</p>';
-    html +=
-      '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();">Close</button>';
+    html += '<h2>' + title + '</h2>';
+    html += '<p>' + text + '</p>';
+
+    switch (type) {
+      case 'restartBoard':
+        html += '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();restartBoard()">Restart</button>';
+        break;
+
+      default:
+      // code block
+    }
+    html += '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();">Close</button>';
+
+
     modal.innerHTML = html;
     modalBack.classList.add('modal-back');
     modal.classList.add('modal');

@@ -183,14 +183,16 @@
   font-size: 1.5rem;
 }
 
-button {
+.modalButton {
   color: white;
   font-size: 1.5rem;
   display: inline-block;
   border-radius: 25px;
   background-color: darkgrey;
   padding: 1rem;
+  margin:5px;
 }
-button:hover{
-    background-color: grey;
+
+.modalButton:hover {
+  background-color: grey;
 }
