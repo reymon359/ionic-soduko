@@ -259,3 +259,45 @@
 //   // this.table[0].splice(0, 0, primeraPos);
 //
 // }
+
+// // -------------MODAL------------
+// // PARAMS
+// // - Type: The type of the modal.
+// //    - default: Just clocse modal.
+// //    - choose: Confirm/Cancel.
+// //    - multiple: Multiple options.
+// // - Title: The modal title.
+// // - Text: The modal text.
+// // - Color: The modal colour.
+// //    - default: Grey.
+// //    - success: green.
+// //    - warning: yellow.
+// //    - error: red.
+// modal(title = 'Title', text = 'text', type = 'default', color = 'default') {
+//   console.log(title, text, type, color);
+//   let modalBack = document.createElement('div'),
+//     modal = document.createElement('div'),
+//     html = '';
+//   modalBack.appendChild(modal);
+//
+//   html += '<h2>' + title + '</h2>';
+//   html += '<p>' + text + '</p>';
+//
+//   switch (type) {
+//     case 'restartBoard':
+//       html += '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();restartBoard()">Restart</button>';
+//       break;
+//
+//     default:
+//     // code block
+//   }
+//   html += '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();">Close</button>';
+//
+//
+//   modal.innerHTML = html;
+//   modalBack.classList.add('modal-back');
+//   modal.classList.add('modal');
+//   document.body.appendChild(modalBack);
+//   document.getElementById('modalButton').focus();
+//
+// }

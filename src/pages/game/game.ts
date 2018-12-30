@@ -38,6 +38,8 @@ export class GamePage {
   gameBoard: any[] = [];
   numbers = [];
   boxSelected = [null, null];
+  timeRunning: boolean;
+  arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
   constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
     console.log("enters gamepage")
     this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
@@ -48,7 +50,6 @@ export class GamePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
-    this.startGame();
   }
   createNewGame() {
     let newBoard = this.newBoard();
@@ -61,6 +62,8 @@ export class GamePage {
     this.gameBoard = newBoard;
     this.applyDifficulty();
     this.updateBoardHistory();
+    this.timeRunning = true;
+    this.timeController();
   }
   getBoard(board) {
     let aux = board;
@@ -75,10 +78,7 @@ export class GamePage {
     this.game.boardHistory[newPos] = boardToUpdate;
     console.log(this.game.boardHistory);
   }
-  startGame() {
-    this.StartTime();
-  }
-  // Here we
+
   newBoard() {
     let board = this.boardBase;
     let random10 = Math.floor((Math.random() * 10) + 1);
@@ -94,18 +94,12 @@ export class GamePage {
     }
     return board;
   }
-  StartTime() {
-    let timer = setInterval(() => {
-      this.game.time = this.game.time + 1;
-    }, 1000);
-  }
-  //   function randomIntFromInterval(min, max) // min and max included
-  // {
-  //   return Math.floor(Math.random() * (max - min + 1) + min);
-  // }
+
   // Now i am going to apply the difficulty chosen in the homepage that ai got with the params.
   // I will go ver the gameBoard positions and deleting x number of values depending on the difficulty.
   applyDifficulty() {
+    // this.gameBoard[0][0] = '';
+
     let min = this.game.difficulty;
     let max = min + 2;
     this.gameBoard.forEach((row) => {
@@ -144,6 +138,7 @@ export class GamePage {
         if (document.getElementsByClassName('selected').length > 0) {
           document.getElementsByClassName('selected')[0].classList.remove('selected');
         }
+        this.checkWin();
       }
     } else {
       let alert = this.alertCtrl.create({
@@ -154,6 +149,25 @@ export class GamePage {
       alert.present();
     }
   }
+
+  checkWin() {
+    if (this.gameBoard == this.game.boardSolution) {
+      this.timeRunning = false;
+      let alert = this.alertCtrl.create({
+        title: 'CONGRATULATIONS',
+        message: `You just won this ${this.arrayDificulties[this.game.difficulty]} game in ${this.game.time} secs !!`,
+        buttons: [{
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }]
+      });
+      alert.present();
+    }
+  }
+
+  // Bottom buttons ----------------
 
   // Go back to last move
   goBack() {
@@ -182,8 +196,8 @@ export class GamePage {
             handler: () => {
               console.log('restarting board');
               console.log(this.game.boardHistory.shift());
-              this.gameBoard=this.game.boardHistory.shift();
-              this.game.boardHistory=[];
+              this.gameBoard = this.game.boardHistory.shift();
+              this.game.boardHistory = [];
               this.updateBoardHistory();
             }
           },
@@ -196,24 +210,26 @@ export class GamePage {
       alert.present();
     } else {
       let alert = this.alertCtrl.create({
-      title: 'Impossible',
-      message: 'The board is already like when you started',
-      buttons: ['Ok']
-    });
-    alert.present();
-}
-
+        title: 'Impossible',
+        message: 'The board is already like when you started',
+        buttons: ['Ok']
+      });
+      alert.present();
+    }
   }
-
-
-
-
 
 
   // =================
   // USEFUL FUNCTIONS
   // =================
-
+  timeController() {
+    let timer = setInterval(() => {
+      if (this.timeRunning) {
+        console.log('otro segundo');
+        this.game.time = this.game.time + 1;
+      }
+    }, 1000);
+  }
   // -------SHUFFLE ARRAY------------
   shuffleArray(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -232,47 +248,5 @@ export class GamePage {
       // Lastly in the randomIndex position we put the temporaryValue we saved before
     }
     return array;
-  }
-
-  // -------------MODAL------------
-  // PARAMS
-  // - Type: The type of the modal.
-  //    - default: Just clocse modal.
-  //    - choose: Confirm/Cancel.
-  //    - multiple: Multiple options.
-  // - Title: The modal title.
-  // - Text: The modal text.
-  // - Color: The modal colour.
-  //    - default: Grey.
-  //    - success: green.
-  //    - warning: yellow.
-  //    - error: red.
-  modal(title = 'Title', text = 'text', type = 'default', color = 'default') {
-    console.log(title, text, type, color);
-    let modalBack = document.createElement('div'),
-      modal = document.createElement('div'),
-      html = '';
-    modalBack.appendChild(modal);
-
-    html += '<h2>' + title + '</h2>';
-    html += '<p>' + text + '</p>';
-
-    switch (type) {
-      case 'restartBoard':
-        html += '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();restartBoard()">Restart</button>';
-        break;
-
-      default:
-      // code block
-    }
-    html += '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();">Close</button>';
-
-
-    modal.innerHTML = html;
-    modalBack.classList.add('modal-back');
-    modal.classList.add('modal');
-    document.body.appendChild(modalBack);
-    document.getElementById('modalButton').focus();
-
   }
 }
