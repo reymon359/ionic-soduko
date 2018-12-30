@@ -56,6 +56,13 @@
 // -----GAME-------------
 // ----------------------
 
+.menuTop {
+  max-width: 500px;
+  margin: auto;
+}
+
+
+
 .game {
   max-width: 500px;
   margin: auto;
@@ -190,7 +197,7 @@
   border-radius: 25px;
   background-color: darkgrey;
   padding: 1rem;
-  margin:5px;
+  margin: 5px;
 }
 
 .modalButton:hover {

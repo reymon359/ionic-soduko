@@ -1,6 +1,21 @@
 <ion-content padding>
-  <ion-icon navPop left name="arrow-round-back"></ion-icon>
-  {{this.game.time}}
+
+  <ion-grid class="menuTop">
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start navPop left color="dark">
+          <ion-icon name="md-arrow-round-back"></ion-icon>
+          Home
+        </button>
+      </ion-col>
+      <ion-col>
+        <ion-item no-lines>
+          <ion-icon name="md-timer" item-end></ion-icon>
+          Time: {{this.game.time}} sec.
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <div class="game">
     <div class="board">
       <div class="row" *ngFor="let row of gameBoard; let i =index">
@@ -22,7 +37,7 @@
       <div (click)="goBack()" class="extraButton">back</div>
       <!-- <div class="extraButton">forward</div> -->
       <div (click)="restartBoard()" class="extraButton">restart</div>
-      <div class="extraButton">solve</div>
+      <div class="extraButton">hint</div>
     </div>
   </div>
 
