@@ -170,11 +170,27 @@
   background-color: #fff;
   padding: 10px;
   box-shadow: 0 16px 20px rgba(0,0,0,.4);
-
 }
 
 .modal > h2 {
   margin: 0;
-  padding: 0.2em;
+  padding: 0.2em 0.2em 0;
   color: #000;
+  font-size: 2rem;
+}
+
+.modal > p {
+  font-size: 1.5rem;
+}
+
+button {
+  color: white;
+  font-size: 1.5rem;
+  display: inline-block;
+  border-radius: 25px;
+  background-color: darkgrey;
+  padding: 1rem;
+}
+button:hover{
+    background-color: grey;
 }

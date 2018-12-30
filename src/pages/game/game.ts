@@ -61,7 +61,6 @@ export class GamePage {
     this.gameBoard = newBoard;
     this.applyDifficulty();
     this.updateBoardHistory();
-
   }
   getBoard(board) {
     let aux = board;
@@ -119,7 +118,6 @@ export class GamePage {
 
   selectBox(row, col) {
     // Check if the place to put the number is diferent than the history board [0]
-
     let insideBoxSelected = document.getElementById('box-' + row + col);
     if (!insideBoxSelected.classList.contains('fixed')) {
       this.boxSelected = [row, col];
@@ -147,8 +145,26 @@ export class GamePage {
           document.getElementsByClassName('selected')[0].classList.remove('selected');
         }
       }
+    }else{
+      this.modal('Wait', `Select before where you want to put the ${number}`);
     }
   }
+
+  // =================
+  // Extra Functions
+  // =================
+  goBack(){
+    // if cant , modal you cant go more back
+
+
+
+    this.updateBoardHistory();
+
+  }
+
+
+
+
 
 
   // =================
@@ -188,7 +204,7 @@ export class GamePage {
   //    - success: green.
   //    - warning: yellow.
   //    - error: red.
-  modal( title = 'Title', text = 'text',type = 'default', color = 'default') {
+  modal( title = 'Title', text = 'text', type = 'default', color = 'default') {
     console.log(title,text,type,color);
     let modalBack = document.createElement('div'),
       modal = document.createElement('div'),
@@ -199,9 +215,8 @@ export class GamePage {
       '<h2>' + title + '</h2>';
     html +=
       '<p>' + text + '</p>';
-
     html +=
-      '<button id="modalButton" onclick="this.parentNode.parentNode.remove();">Close</button>';
+      '<button class="modalButton" id="modalButton" onclick="this.parentNode.parentNode.remove();">Close</button>';
     modal.innerHTML = html;
     modalBack.classList.add('modal-back');
     modal.classList.add('modal');
