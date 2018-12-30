@@ -74,6 +74,7 @@ export class GamePage {
 
   }
   updateBoardHistory() {
+    console.log("updateBoardhistory");
     let aux = this.gameBoard;
     let myJSON = JSON.stringify(aux);
     let boardToUpdate = JSON.parse(myJSON);
@@ -168,25 +169,25 @@ export class GamePage {
     let win = true;
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
-          if(this.gameBoard[i][j] !== this.game.boardSolution[i][j]){
-            win=false;
-          }
+        if (this.gameBoard[i][j] !== this.game.boardSolution[i][j]) {
+          win = false;
+        }
       }
     }
-      if (win) {
-        this.timeRunning = false;
-        let alert = this.alertCtrl.create({
-          title: 'CONGRATULATIONS',
-          message: `You just won this ${this.arrayDificulties[this.game.difficulty]} game in ${this.game.time} secs !!`,
-          buttons: [{
-            text: 'Ok',
-            handler: () => {
-              this.navCtrl.pop();
-            }
-          }]
-        });
-        alert.present();
-      }
+    if (win) {
+      this.timeRunning = false;
+      let alert = this.alertCtrl.create({
+        title: 'CONGRATULATIONS',
+        message: `You just won this ${this.arrayDificulties[this.game.difficulty]} game in ${this.game.time} secs !!`,
+        buttons: [{
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }]
+      });
+      alert.present();
+    }
   }
 
 
@@ -218,9 +219,8 @@ export class GamePage {
           {
             text: 'Confirm',
             handler: () => {
-              console.log('restarting board');
-              console.log(this.game.boardHistory.shift());
-              this.gameBoard = this.game.boardHistory.shift();
+              // console.log(this.game.boardHistory.shift());
+              this.gameBoard = this.game.boardHistory[0];
               this.game.boardHistory = [];
               this.updateBoardHistory();
             }
