@@ -14,6 +14,7 @@ import {
 } from '../pages/index.pages';
 //providers
 import { GameProvider, UsefulProvider, UserProvider } from '../providers/index.providers';
+import { StorageProvider } from '../providers/storage/storage';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { GameProvider, UsefulProvider, UserProvider } from '../providers/index.p
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    GameProvider, UsefulProvider, UserProvider
+    GameProvider, UsefulProvider, UserProvider,
+    StorageProvider
   ]
 })
 export class AppModule { }
