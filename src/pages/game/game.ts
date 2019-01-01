@@ -27,12 +27,12 @@ export class GamePage {
     state: "",
     difficulty: 0,
     dateStart: null,
-    datePaused: null,
+    datePaused: null, // not used
     dateEnded: null,
     boardSolution: [],
     boardActual: [],
     boardHistory: [],
-    moves: 0,
+    moves: 0, // not be used
     time: 0
   }
   gameBoard: any[] = [];
@@ -175,6 +175,7 @@ export class GamePage {
       }
     }
     if (win) {
+      this.game.dateEnded = this.usefulProv.getDate(new Date());
       this.timeRunning = false;
       let alert = this.alertCtrl.create({
         title: 'CONGRATULATIONS',
