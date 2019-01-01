@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 // Providers
-import { UsefulProvider } from "../../providers/index.providers";
+import { UsefulProvider, GameProvider } from "../../providers/index.providers";
 // models
 import { Game } from "../../models/index.models";
 
@@ -11,17 +11,17 @@ import { Game } from "../../models/index.models";
   templateUrl: 'game.html',
 })
 export class GamePage {
-  boardBase: any[] = [
-    [2, 8, 6, 7, 5, 4, 9, 3, 1],
-    [9, 3, 1, 2, 8, 6, 7, 5, 4],
-    [7, 5, 4, 9, 1, 3, 8, 6, 2],
-    [8, 9, 2, 6, 7, 5, 4, 1, 3],
-    [6, 7, 5, 4, 3, 1, 2, 9, 8],
-    [4, 1, 3, 8, 9, 2, 6, 7, 5],
-    [5, 6, 9, 3, 4, 8, 1, 2, 7],
-    [3, 4, 7, 1, 2, 9, 5, 8, 6],
-    [1, 2, 8, 5, 6, 7, 3, 4, 9]
-  ];
+  // boardBase: any[] = [
+  //   [2, 8, 6, 7, 5, 4, 9, 3, 1],
+  //   [9, 3, 1, 2, 8, 6, 7, 5, 4],
+  //   [7, 5, 4, 9, 1, 3, 8, 6, 2],
+  //   [8, 9, 2, 6, 7, 5, 4, 1, 3],
+  //   [6, 7, 5, 4, 3, 1, 2, 9, 8],
+  //   [4, 1, 3, 8, 9, 2, 6, 7, 5],
+  //   [5, 6, 9, 3, 4, 8, 1, 2, 7],
+  //   [3, 4, 7, 1, 2, 9, 5, 8, 6],
+  //   [1, 2, 8, 5, 6, 7, 3, 4, 9]
+  // ];
   public game: Game = {
     token: "",
     state: "",
@@ -30,7 +30,6 @@ export class GamePage {
     datePaused: null, // not used
     dateEnded: null,
     boardSolution: [],
-    boardActual: [],
     boardHistory: [],
     moves: 0, // not be used
     time: 0
@@ -40,7 +39,7 @@ export class GamePage {
   boxSelected = [null, null];
   timeRunning: boolean;
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider, private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
     console.log("enters gamepage")
     this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
     // this.numbers = Array(5).fill(4); // [4,4,4,4,4]
@@ -153,6 +152,7 @@ export class GamePage {
         if (document.getElementsByClassName('selected').length > 0) {
           document.getElementsByClassName('selected')[0].classList.remove('selected');
         }
+        this.game.moves++;
         this.checkWin();
       }
     } else {
@@ -272,5 +272,21 @@ export class GamePage {
       // Lastly in the randomIndex position we put the temporaryValue we saved before
     }
     return array;
+  }
+
+  // =================
+  // OTHERS
+  // =================
+
+  pauseGame() {
+    console.log('pausing');
+    this.timeRunning = false;
+    this.game.state = 'paused';
+    this.game.datePaused = this.usefulProv.getDate(new Date());
+    this.gameProv.saveCurrentGame(this.game);
+  }
+
+  resumeGame() {
+
   }
 }

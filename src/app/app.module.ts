@@ -13,9 +13,10 @@ import {
   HomePage, GamePage, ProfilePage, RulesPage, CreditsPage
 } from '../pages/index.pages';
 //providers
-import { GameProvider, UsefulProvider, UserProvider } from '../providers/index.providers';
-import { StorageProvider } from '../providers/storage/storage';
-
+import { UsefulProvider, UserProvider } from '../providers/index.providers';
+import { GameProvider } from '../providers/game/game';
+//storage
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
@@ -24,7 +25,8 @@ import { StorageProvider } from '../providers/storage/storage';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +38,6 @@ import { StorageProvider } from '../providers/storage/storage';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     GameProvider, UsefulProvider, UserProvider,
-    StorageProvider
   ]
 })
 export class AppModule { }
