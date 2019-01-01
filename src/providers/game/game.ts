@@ -32,13 +32,13 @@ export class GameProvider {
                   resolve(currentGame);
                 }
                 else {
-                  resolve('There is no game saved');
+                  resolve(null);
                 }
               })
           })
       } else {
         // PC
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("currentGame")) {
           let currentGame = JSON.parse(window.localStorage.getItem('currentGame'));
           resolve(currentGame);
         } else {

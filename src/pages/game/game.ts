@@ -39,7 +39,8 @@ export class GamePage {
   boxSelected = [null, null];
   timeRunning: boolean;
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider, private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
+    private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
     console.log("enters gamepage")
     this.numbers = Array(10).fill(1).map((x, i) => i); // [0,1,2,3,4]
     // this.numbers = Array(5).fill(4); // [4,4,4,4,4]

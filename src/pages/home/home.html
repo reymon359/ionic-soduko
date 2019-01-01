@@ -7,7 +7,7 @@
     </div>
     <div class="menu-row middle-row">
       <div [navPush]="profilePage" class="menu-col "> PROFILE </div>
-      <div [navPush]="gamePage" [navParams]="{difficulty:difficulty}" class="menu-col middle-col"> PLAY </div>
+      <div (click)="playGame()" class="menu-col middle-col"> PLAY </div>
       <div [navPush]="rulesPage"class="menu-col t">RULES</div>
     </div>
     <div class="menu-row">
