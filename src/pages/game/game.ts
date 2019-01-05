@@ -295,11 +295,18 @@ export class GamePage {
 
   pauseGame() {
     // if (this.game.moves > 0) {
-      this.timeController(false);
-      this.game.state = 'paused';
-      this.game.datePaused = this.usefulProv.getDate(new Date());
-      this.gameProv.saveCurrentGame(this.game);
+    this.timeController(false);
+    this.game.state = 'paused';
+    this.game.datePaused = this.usefulProv.getDate(new Date());
+    this.gameProv.saveCurrentGame(this.game);
     // }
   }
+  toggleCircle() {
+    let insideBoxes = [];
+    for (let i = 0; i < document.getElementsByClassName("insidebox").length; i++) {
+      insideBoxes[i] = document.getElementsByClassName("insidebox")[i];
+      insideBoxes[i].classList.toggle('circle');
 
+    }
+  }
 }
