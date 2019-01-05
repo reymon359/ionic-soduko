@@ -249,7 +249,7 @@ export class GamePage {
   // =================
   timeController(timeOn) {
     this.timeRunning=timeOn;
-    let timer = setInterval(() => {
+    setInterval(() => {
       if (this.timeRunning) {
         this.game.time = this.game.time + 1;
       }

@@ -1,8 +1,37 @@
 <ion-content padding>
+
+
+  <ion-grid class=" max-550">
+    <ion-row>
+      <ion-col>
+        <h1>S O D U K O</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button (click)="changeDifficulty()" ion-button block color="primary"> {{arrayDificulties[difficulty]}} </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button (click)="playGame()" ion-button block color="primary"> Play </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button [navPush]="rulesPage" ion-button block color="primary"> Rules </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+    <ion-col>
+      <button [navPush]="creditsPage" ion-button block color="primary"> Credits </button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+<!--
+  OLD MENU probably v2 menu
   <div class="main-menu">
     <div class="menu-row">
-
-
       <div class="menu-col "> fwefwe</div>
       <div (click)="changeDifficulty()" class="menu-col middle-col">{{arrayDificulties[difficulty]}}</div>
       <div class="menu-col "> SHARE</div>
@@ -10,12 +39,14 @@
     <div class="menu-row middle-row">
       <div [navPush]="profilePage" class="menu-col "> PROFILE </div>
       <div (click)="playGame()" class="menu-col middle-col"> PLAY </div>
-      <div [navPush]="rulesPage"class="menu-col t">RULES</div>
+      <div [navPush]="rulesPage" class="menu-col t">RULES</div>
     </div>
     <div class="menu-row">
       <div class="menu-col ">SCORES</div>
       <div class="menu-col middle-col">OPTION</div>
       <div [navPush]="creditsPage" class="menu-col ">CREDITS</div>
     </div>
-  </div>
+  </div> -->
+
+
 </ion-content>
