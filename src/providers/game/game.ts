@@ -42,7 +42,7 @@ export class GameProvider {
           let currentGame = JSON.parse(window.localStorage.getItem('currentGame'));
           resolve(currentGame);
         } else {
-          resolve('There is no game saved');
+          resolve(null);
         }
       }
     });

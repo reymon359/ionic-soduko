@@ -4,6 +4,8 @@ import { NavController, AlertController } from 'ionic-angular';
 import { CreditsPage, GamePage, ProfilePage, RulesPage } from "../index.pages";
 // Providers
 import { GameProvider } from '../../providers/game/game';
+// models
+import { Game } from "../../models/index.models";
 
 @Component({
   selector: 'page-home',
@@ -37,14 +39,13 @@ export class HomePage {
     if (this.difficulty === 5) this.difficulty = 0;
   }
   playGame() {
-    this.gameProv.loadCurrentGame().then(data => {
-      console.log(data);
-      if (data == "There is no game saved") {
+    this.gameProv.loadCurrentGame().then((currentGame: Game) => {
+      if (currentGame == null) {
         this.navCtrl.push(GamePage, { difficulty: this.difficulty });
       } else {
         let alert = this.alertCtrl.create({
           title: 'There is already a game started',
-          message: 'You were playing a game some time ago. Do you want to resume it or start a new one?',
+          message: `You played it last time the ${this.getdateClean(currentGame.datePaused)}. Do you want to resume it or start a new one?`,
           buttons: [
             {
               text: 'Resume',
@@ -64,5 +65,16 @@ export class HomePage {
         alert.present();
       }
     });
+  }
+  getdateClean(date) {
+    let dateAux = new Date(date);
+    let day, month, year, hour, minute, second;
+    day = dateAux.getDate();
+    month = dateAux.getMonth() + 1;
+    year = dateAux.getFullYear();
+    hour = dateAux.getHours();
+    minute = dateAux.getMinutes();
+    second = dateAux.getSeconds();
+    return `${day}/${month}/${year} at ${hour}:${minute}:${second}`
   }
 }

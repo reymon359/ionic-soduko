@@ -46,8 +46,11 @@ export class GamePage {
   resumeGame() {
     this.gameProv.loadCurrentGame().then((currentGame: Game) => {
       this.game = currentGame;
-      this.gameBoard = this.game.boardHistory[this.game.boardHistory.length - 1];
-      this.updateBoardHistory();
+      let myJSON = JSON.stringify(this.game.boardHistory[this.game.boardHistory.length - 1]);
+      let boardAux = JSON.parse(myJSON);
+      this.gameBoard = boardAux;
+      // = this.game.boardHistory[this.game.boardHistory.length - 1];
+      // this.updateBoardHistory();
       this.timeController(true);
     });
   }
@@ -291,12 +294,12 @@ export class GamePage {
   // =================
 
   pauseGame() {
-    if (this.game.moves > 0) {
+    // if (this.game.moves > 0) {
       this.timeController(false);
       this.game.state = 'paused';
       this.game.datePaused = this.usefulProv.getDate(new Date());
       this.gameProv.saveCurrentGame(this.game);
-    }
+    // }
   }
 
 }
