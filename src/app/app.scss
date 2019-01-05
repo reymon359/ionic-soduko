@@ -95,17 +95,31 @@
   display: inline-block;
   width: 11%;
   text-align: center;
-      padding: .5%;
+    padding: .5%;
 }
 
 .insidebox {
   height: 100%;
   padding: 30%;
   cursor: pointer;
+   animation: square 2s ;
 }
+@keyframes square {
+  from {  border-radius: 50%;}
+  to {  border-radius: 0%;}
+}
+
 .circle{
+   animation: circle 2s ;
   border-radius: 50%;
 }
+@keyframes circle {
+  from {  border-radius: 0%;}
+  to {  border-radius: 50%;}
+}
+
+
+
 .fixed {
   background-color: #80cbc4;
   cursor: context-menu;
