@@ -26,7 +26,7 @@ export class HomePage {
   }
   playGame() {
     this.gameProv.loadCurrentGame().then(data => {
-      if (data === null) {
+      if (data == null) {
         this.navCtrl.push(GamePage, {  difficulty: this.difficulty });
       } else {
         let alert = this.alertCtrl.create({

@@ -248,7 +248,7 @@ export class GamePage {
   // USEFUL FUNCTIONS
   // =================
   timeController(timeOn) {
-    this.timeRunning=timeOn;
+    this.timeRunning = timeOn;
     setInterval(() => {
       if (this.timeRunning) {
         this.game.time = this.game.time + 1;
@@ -280,10 +280,12 @@ export class GamePage {
   // =================
 
   pauseGame() {
-    this.timeController(false);
-    this.game.state = 'paused';
-    this.game.datePaused = this.usefulProv.getDate(new Date());
-    this.gameProv.saveCurrentGame(this.game);
+    if (this.game.moves > 0) {
+      this.timeController(false);
+      this.game.state = 'paused';
+      this.game.datePaused = this.usefulProv.getDate(new Date());
+      this.gameProv.saveCurrentGame(this.game);
+    }
   }
 
 }
