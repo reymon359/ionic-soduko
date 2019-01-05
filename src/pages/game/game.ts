@@ -47,6 +47,7 @@ export class GamePage {
     this.gameProv.loadCurrentGame().then((currentGame: Game) => {
       this.game = currentGame;
       this.gameBoard = this.game.boardHistory[this.game.boardHistory.length - 1];
+      this.updateBoardHistory();
       this.timeController(true);
     });
   }
@@ -57,7 +58,6 @@ export class GamePage {
     this.game.boardSolution = aux;
     let myJSON = JSON.stringify(aux);
     let newBoard = JSON.parse(myJSON);
-    console.log(newBoard);
     this.game.token = this.usefulProv.generateToken();
     this.game.state = "started";
     this.game.difficulty = this.navParams.get('difficulty');
@@ -156,12 +156,23 @@ export class GamePage {
         this.checkWin();
       }
     } else {
-      let alert = this.alertCtrl.create({
-        title: 'Wait',
-        message: `Select before where you want to put the ${number}`,
-        buttons: ['Ok']
-      });
-      alert.present();
+      if (number == 0) {
+        let alert = this.alertCtrl.create({
+          title: 'Wait',
+          message: `Select before where you want to remove a number`,
+          buttons: ['Ok']
+        });
+        alert.present();
+
+      } else {
+
+        let alert = this.alertCtrl.create({
+          title: 'Wait',
+          message: `Select before where you want to put the ${number}`,
+          buttons: ['Ok']
+        });
+        alert.present();
+      }
     }
   }
 

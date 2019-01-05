@@ -20,13 +20,17 @@ export class HomePage {
   constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController) {
 
   }
+  letters(){
+
+  }
   changeDifficulty() {
     this.difficulty++;
     if (this.difficulty === 5) this.difficulty = 0;
   }
   playGame() {
     this.gameProv.loadCurrentGame().then(data => {
-      if (data == null) {
+      console.log(data);
+      if (data == "There is no game saved") {
         this.navCtrl.push(GamePage, {  difficulty: this.difficulty });
       } else {
         let alert = this.alertCtrl.create({
