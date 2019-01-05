@@ -48,4 +48,5 @@ export class GameProvider {
     });
     return promise;
   }
+
 }

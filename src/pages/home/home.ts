@@ -27,7 +27,7 @@ export class HomePage {
   playGame() {
     this.gameProv.loadCurrentGame().then(data => {
       if (data === null) {
-        this.navCtrl.push(GamePage, { difficulty: this.difficulty });
+        this.navCtrl.push(GamePage, {  difficulty: this.difficulty });
       } else {
         let alert = this.alertCtrl.create({
           title: 'There is already a game started',
@@ -36,6 +36,7 @@ export class HomePage {
             {
               text: 'Resume',
               handler: () => {
+                this.navCtrl.push(GamePage, { resumeGame: true });
                 // TODO: Resume game
               }
             },

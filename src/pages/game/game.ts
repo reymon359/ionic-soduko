@@ -24,20 +24,45 @@ export class GamePage {
     time: 0
   }
   gameBoard: any[] = [];
-  numbers = [];
+  numbers = Array(10).fill(1).map((x, i) => i);
   boxSelected = [null, null];
   timeRunning: boolean;
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
     private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
+    if (this.navParams.get('resumeGame')) {
+      this.resumeGame();
+    } else {
+      this.createNewGame();
+    }
     console.log("enters gamepage")
-    this.numbers = Array(10).fill(1).map((x, i) => i);
-    this.createNewGame();
+    // this.numbers = Array(10).fill(1).map((x, i) => i);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
   }
+
+  resumeGame() {
+    this.gameProv.loadCurrentGame().then((currentGame: Game) => {
+      this.game = currentGame;
+      console.log(currentGame);
+      console.log(this.game);
+      this.gameBoard = this.game.boardHistory[this.game.boardHistory.length];
+      // this.game.token = data.token;
+      // state: "",
+      // difficulty: 0,
+      // dateStart: null,
+      // datePaused: null, // not used
+      // dateEnded: null,
+      // boardSolution: [],
+      // boardHistory: [],
+      // moves: 0, // not be used
+      // time: 0
+    });
+  }
+
+
   createNewGame() {
     // let newBoard = this.newBoard();
     let aux = this.newBoard();
@@ -271,10 +296,9 @@ export class GamePage {
     this.timeRunning = false;
     this.game.state = 'paused';
     this.game.datePaused = this.usefulProv.getDate(new Date());
+    console.log('gameTo save: ');
+    console.log(this.game);
     this.gameProv.saveCurrentGame(this.game);
   }
 
-  resumeGame() {
-
-  }
 }
