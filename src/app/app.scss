@@ -74,9 +74,13 @@
   margin: auto;
 }
 
+
 .board {
-  margin-top: 5%;
-  text-align: center;
+  // width: 100%;
+  // padding-top: 100%;
+  //   position: relative;
+  // margin-top: 5%;
+  // text-align: center;
   // width: 90%;
   // max-width: 400px;
   // height: 400px;
@@ -91,15 +95,17 @@
   display: inline-block;
   width: 11%;
   text-align: center;
+      padding: .5%;
 }
 
 .insidebox {
   height: 100%;
   padding: 30%;
-  border-radius: 50%;
   cursor: pointer;
 }
-
+.circle{
+  border-radius: 50%;
+}
 .fixed {
   background-color: #80cbc4;
   cursor: context-menu;

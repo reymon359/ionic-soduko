@@ -19,7 +19,7 @@ export class HomePage {
 
   difficulty: number = 0; // TODO: Save difficulty chosen in localstorage
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
-  title: string[] = [];
+  title: string[] = ['','','','','','','','',''];
   constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController) {
   }
 

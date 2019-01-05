@@ -1,62 +1,70 @@
 <ion-content padding>
-
-  <ion-grid class=" max-550">
-    <ion-row>
-      <ion-col>
-        <button (click)="pauseGame()" ion-button icon-start navPop left color="dark">
-          <ion-icon name="md-arrow-round-back"></ion-icon>
-          Home
-        </button>
-      </ion-col>
-      <ion-col>
-        <ion-item no-lines>
-        Difficulty: {{arrayDificulties[this.game.difficulty]}}
-      </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <div class=" max-550">
-    <div class="board">
-      <div class="row" *ngFor="let row of gameBoard; let i =index">
-        <div class="box" *ngFor="let column of gameBoard[i];let j = index" (click)="selectBox(i,j)" [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
-          <div class="insidebox" id="{{ 'box-' + i+j }}" [ngClass]="{ 'fixed': (gameBoard[i][j]==this.game.boardHistory[0][i][j]) && (gameBoard[i][j]!='') }">
-            <div>{{gameBoard[i][j]}}</div>
+  <!-- <div class=" max-550">
+    <button (click)="pauseGame()" ion-button icon-start navPop left color="dark">
+      <ion-icon name="md-arrow-round-back"></ion-icon>
+      Home
+    </button>
+    <ion-item no-lines>
+          Difficulty: {{arrayDificulties[this.game.difficulty]}}
+        </ion-item> -->
+    <!-- <ion-grid class=" max-550"> -->
+      <ion-row  class=" max-550" justify-content-between>
+        <ion-col col-3>
+          <button ion-button icon-start navPop left color="dark">
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+            Home
+          </button>
+        </ion-col>
+        <ion-col col-5 text-right>
+          <ion-item text-right no-lines>
+          {{arrayDificulties[this.game.difficulty]}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    <!-- </ion-grid> -->
+    <div class=" max-550">
+      <div class="board">
+        <div class="row" *ngFor="let row of gameBoard; let i =index">
+          <div class="box" *ngFor="let column of gameBoard[i];let j = index" (click)="selectBox(i,j)" [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
+            <div class="insidebox circle" id="{{ 'box-' + i+j }}" [ngClass]="{ 'fixed': (gameBoard[i][j]==this.game.boardHistory[0][i][j]) && (gameBoard[i][j]!='') }">
+              <div>{{gameBoard[i][j]}}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="numberContainer">
-      <div class="numberSelect" *ngFor="let number of numbers" (click)="putNumber(number)">
-        <button ion-button round> {{number}}</button>
+      <div class="numberContainer">
+        <div class="numberSelect" *ngFor="let number of numbers" (click)="putNumber(number)">
+          <button ion-button round> {{number}}</button>
+        </div>
       </div>
-    </div>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <button (click)="goBack()" ion-button left icon-only color="dark">
-            <ion-icon name="md-undo"></ion-icon>
-          </button>
-        </ion-col>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button (click)="goBack()" ion-button left icon-only color="dark">
+              <ion-icon name="md-undo"></ion-icon>
+            </button>
+          </ion-col>
 
-        <ion-col>
-          <button (click)="restartBoard()" ion-button icon-only color="dark">
-            <ion-icon name="md-refresh"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col>
-          <ion-item no-lines>
-            <ion-icon name="md-timer" item-end></ion-icon>
-            Time: {{this.game.time}} sec.
-          </ion-item>
-        </ion-col>
-        <!-- <ion-col>
+          <ion-col>
+            <button (click)="restartBoard()" ion-button icon-only color="dark">
+              <ion-icon name="md-refresh"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <ion-item no-lines>
+              <ion-icon name="md-timer" item-end></ion-icon>
+              Time: {{this.game.time}} sec.
+            </ion-item>
+          </ion-col>
+          <!-- <ion-col>
           <button (click)="restartBoard()" ion-button round right icon-only color="dark">
             <ion-icon name="md-eye"></ion-icon>
           </button>
         </ion-col> -->
-      </ion-row>
-    </ion-grid>
-  </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+  <!-- </div> -->
 
 </ion-content>
