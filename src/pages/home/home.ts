@@ -17,11 +17,20 @@ export class HomePage {
 
   difficulty: number = 0; // TODO: Save difficulty chosen in localstorage
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
+  title: string[] = [];
   constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController) {
-
   }
-  letters(){
 
+  ionViewWillEnter() {
+    this.coolTitle();
+  }
+  coolTitle() {
+    let titleAux = ['S', 'O', 'D', 'U', 'K', 'O'];
+    for (let i = 0; i < 3; i++) {
+      let randomPos = Math.floor(Math.random() * titleAux.length + i) + 1;
+      titleAux.splice(randomPos, 0, "");
+    }
+    this.title = titleAux;
   }
   changeDifficulty() {
     this.difficulty++;
@@ -31,7 +40,7 @@ export class HomePage {
     this.gameProv.loadCurrentGame().then(data => {
       console.log(data);
       if (data == "There is no game saved") {
-        this.navCtrl.push(GamePage, {  difficulty: this.difficulty });
+        this.navCtrl.push(GamePage, { difficulty: this.difficulty });
       } else {
         let alert = this.alertCtrl.create({
           title: 'There is already a game started',

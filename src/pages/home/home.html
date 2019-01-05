@@ -1,12 +1,44 @@
 <ion-content padding>
 
+  <div class="title">
 
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item no-lines> {{title[0]}} </ion-item>
+        </ion-col>
+        <ion-col class="middle-col">
+          <ion-item no-lines> {{title[1]}} </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item no-lines> {{title[2]}} </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="middle-row">
+          <ion-item no-lines> {{title[3]}} </ion-item>
+        </ion-col>
+        <ion-col class="middle-col middle-row">
+          <ion-item no-lines> {{title[4]}} </ion-item>
+        </ion-col>
+        <ion-col class="middle-row">
+          <ion-item no-lines> {{title[5]}} </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item no-lines> {{title[6]}} </ion-item>
+        </ion-col>
+        <ion-col class="middle-col">
+          <ion-item no-lines> {{title[7]}} </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item no-lines> {{title[8]}} </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
   <ion-grid class=" max-550">
-    <ion-row>
-      <ion-col>
-        <h1>S O D U K O</h1>
-      </ion-col>
-    </ion-row>
     <ion-row>
       <ion-col>
         <button (click)="changeDifficulty()" ion-button block color="primary"> {{arrayDificulties[difficulty]}} </button>
@@ -23,12 +55,12 @@
       </ion-col>
     </ion-row>
     <ion-row>
-    <ion-col>
-      <button [navPush]="creditsPage" ion-button block color="primary"> Credits </button>
-    </ion-col>
-  </ion-row>
+      <ion-col>
+        <button [navPush]="creditsPage" ion-button block color="primary"> Credits </button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-<!--
+  <!--
   OLD MENU probably v2 menu
   <div class="main-menu">
     <div class="menu-row">

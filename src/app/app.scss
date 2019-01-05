@@ -21,7 +21,7 @@
 // ----------------------
 // -----HOME-------------
 // ----------------------
-// 
+//
 // .main-menu {
 //   height: 50%;
 //   padding: 10px;
@@ -39,19 +39,27 @@
 //   }
 // }
 //
-// .middle-row {
-//   border-top: 1px solid #000;
-//   border-bottom: 1px solid #000;
-// }
 //
 // .menu-col {
 //   width: 33%;
 // }
 //
-// .middle-col {
-//   border-left: 1px solid #000;
-//   border-right: 1px solid #000;
-// }
+
+.title {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+
+.middle-row {
+  border-top: 5px solid #000;
+  border-bottom: 5px solid #000;
+}
+
+.middle-col {
+  border-left: 5px solid #000;
+  border-right: 5px solid #000;
+}
 // ----------------------
 // -----GAME-------------
 // ----------------------
@@ -60,8 +68,6 @@
   max-width: 500px;
   margin: auto;
 }
-
-
 
 .max-550 {
   max-width: 500px;
