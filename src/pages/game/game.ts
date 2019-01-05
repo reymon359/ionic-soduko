@@ -46,25 +46,13 @@ export class GamePage {
   resumeGame() {
     this.gameProv.loadCurrentGame().then((currentGame: Game) => {
       this.game = currentGame;
-      console.log(currentGame);
-      console.log(this.game);
-      this.gameBoard = this.game.boardHistory[this.game.boardHistory.length];
-      // this.game.token = data.token;
-      // state: "",
-      // difficulty: 0,
-      // dateStart: null,
-      // datePaused: null, // not used
-      // dateEnded: null,
-      // boardSolution: [],
-      // boardHistory: [],
-      // moves: 0, // not be used
-      // time: 0
+      this.gameBoard = this.game.boardHistory[this.game.boardHistory.length - 1];
+      this.timeController(true);
     });
   }
 
 
   createNewGame() {
-    // let newBoard = this.newBoard();
     let aux = this.newBoard();
     this.game.boardSolution = aux;
     let myJSON = JSON.stringify(aux);
@@ -77,8 +65,7 @@ export class GamePage {
     this.gameBoard = newBoard;
     this.applyDifficulty();
     this.updateBoardHistory();
-    this.timeRunning = true;
-    this.timeController();
+    this.timeController(true);
   }
   getBoard(board) {
     let aux = board;
@@ -260,7 +247,8 @@ export class GamePage {
   // =================
   // USEFUL FUNCTIONS
   // =================
-  timeController() {
+  timeController(timeOn) {
+    this.timeRunning=timeOn;
     let timer = setInterval(() => {
       if (this.timeRunning) {
         this.game.time = this.game.time + 1;
@@ -292,12 +280,9 @@ export class GamePage {
   // =================
 
   pauseGame() {
-    console.log('pausing');
-    this.timeRunning = false;
+    this.timeController(false);
     this.game.state = 'paused';
     this.game.datePaused = this.usefulProv.getDate(new Date());
-    console.log('gameTo save: ');
-    console.log(this.game);
     this.gameProv.saveCurrentGame(this.game);
   }
 
