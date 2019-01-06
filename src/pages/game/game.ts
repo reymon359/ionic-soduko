@@ -37,12 +37,11 @@ export class GamePage {
       this.createNewGame();
     }
     console.log("enters gamepage")
-    // this.numbers = Array(10).fill(1).map((x, i) => i);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GamePage');
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad GamePage');
+  // }
 
   resumeGame() {
     this.gameProv.loadCurrentGame().then((currentGame: Game) => {
@@ -50,8 +49,6 @@ export class GamePage {
       let myJSON = JSON.stringify(this.game.boardHistory[this.game.boardHistory.length - 1]);
       let boardAux = JSON.parse(myJSON);
       this.gameBoard = boardAux;
-      // = this.game.boardHistory[this.game.boardHistory.length - 1];
-      // this.updateBoardHistory();
       this.timeController(true);
     });
   }
@@ -77,13 +74,11 @@ export class GamePage {
 
   }
   updateBoardHistory() {
-    console.log("updateBoardhistory");
     let aux = this.gameBoard;
     let myJSON = JSON.stringify(aux);
     let boardToUpdate = JSON.parse(myJSON);
     let newPos = this.game.boardHistory.length;
     this.game.boardHistory[newPos] = boardToUpdate;
-    console.log(this.game.boardHistory);
   }
 
   newBoard() {
@@ -154,7 +149,7 @@ export class GamePage {
         } else {
           this.gameBoard[row][col] = number;
         }
-        // this.updateBoardHistory();
+        this.updateBoardHistory();
         if (document.getElementsByClassName('selected').length > 0) {
           document.getElementsByClassName('selected')[0].classList.remove('selected');
         }
@@ -238,7 +233,6 @@ export class GamePage {
           {
             text: 'Confirm',
             handler: () => {
-              // console.log(this.game.boardHistory.shift());
               this.gameBoard = this.game.boardHistory[0];
               this.game.boardHistory = [];
               this.updateBoardHistory();
@@ -307,7 +301,6 @@ export class GamePage {
   }
   pizza() {
     this.pizzaCount++;
-    console.log(this.pizzaCount);
     if (this.pizzaCount == 3) {
       let alert = this.alertCtrl.create({
         title: 'You found the pizza!!',
@@ -318,7 +311,6 @@ export class GamePage {
     if (this.pizzaCount > 3) {
       let insideBoxes = [];
       let circle = document.getElementsByClassName("circle").length > 0 || false;
-      console.log(circle);
       for (let i = 0; i < document.getElementsByClassName("insidebox").length; i++) {
         insideBoxes[i] = document.getElementsByClassName("insidebox")[i];
         if (circle) {
