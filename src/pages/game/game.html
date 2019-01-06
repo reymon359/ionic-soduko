@@ -26,7 +26,7 @@
     <div class="board">
       <div class="row" *ngFor="let row of gameBoard; let i =index">
         <div class="box" *ngFor="let column of gameBoard[i];let j = index" (click)="selectBox(i,j)" [ngClass]="{'border-right': j==2||j==5,' border-bottom': i==2||i==5}">
-          <div class="insidebox circle" id="{{ 'box-' + i+j }}" [ngClass]="{ 'fixed': (gameBoard[i][j]==this.game.boardHistory[0][i][j]) && (gameBoard[i][j]!='') }">
+          <div class="insidebox" id="{{ 'box-' + i+j }}" [ngClass]="{ 'fixed': (gameBoard[i][j]==this.game.boardHistory[0][i][j]) && (gameBoard[i][j]!='') }">
             <div>{{gameBoard[i][j]}}</div>
           </div>
         </div>
@@ -50,14 +50,14 @@
             <ion-icon name="md-refresh"></ion-icon>
           </button>
         </ion-col>
-        <ion-col>
-          <button (click)="toggleCircle()" ion-button left icon-only color="dark">
+        <!-- <ion-col>
+          <button (click)="pizza()" ion-button left icon-only color="dark">
             <ion-icon name="md-pizza"></ion-icon>
           </button>
-        </ion-col>
+        </ion-col> -->
         <ion-col>
           <ion-item no-lines>
-            <ion-icon name="md-timer" item-end></ion-icon>
+            <ion-icon  (click)="pizza()" name="md-timer" item-end></ion-icon>
           {{this.game.time}} sec.
           </ion-item>
         </ion-col>

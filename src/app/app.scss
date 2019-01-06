@@ -102,7 +102,12 @@
   height: 100%;
   padding: 30%;
   cursor: pointer;
-   animation: square 2s ;
+ animation:  2s;
+  border-radius: 20%;
+}
+.square{
+  animation: square 2s ;
+  border-radius: 0%;
 }
 @keyframes square {
   from {  border-radius: 50%;}

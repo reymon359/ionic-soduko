@@ -28,6 +28,7 @@ export class GamePage {
   boxSelected = [null, null];
   timeRunning: boolean;
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
+  pizzaCount = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
     private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
     if (this.navParams.get('resumeGame')) {
@@ -130,11 +131,13 @@ export class GamePage {
     // Check if the place to put the number is diferent than the history board [0]
     let insideBoxSelected = document.getElementById('box-' + row + col);
     if (!insideBoxSelected.classList.contains('fixed')) {
-      this.boxSelected = [row, col];
+
       if (document.getElementsByClassName('selected').length > 0) {
         document.getElementsByClassName('selected')[0].classList.remove('selected');
       }
       insideBoxSelected.classList.add("selected");
+      this.boxSelected = [row, col];
+
     }
   }
 
@@ -151,7 +154,7 @@ export class GamePage {
         } else {
           this.gameBoard[row][col] = number;
         }
-        this.updateBoardHistory();
+        // this.updateBoardHistory();
         if (document.getElementsByClassName('selected').length > 0) {
           document.getElementsByClassName('selected')[0].classList.remove('selected');
         }
@@ -212,6 +215,7 @@ export class GamePage {
   // Go back to last move
   goBack() {
     if (this.game.boardHistory.length > 1) {
+      this.game.moves++;
       this.game.boardHistory.splice(-1, 1);
       this.gameBoard = this.game.boardHistory[this.game.boardHistory.length - 1];
     } else {
@@ -301,12 +305,30 @@ export class GamePage {
     this.gameProv.saveCurrentGame(this.game);
     // }
   }
-  toggleCircle() {
-    let insideBoxes = [];
-    for (let i = 0; i < document.getElementsByClassName("insidebox").length; i++) {
-      insideBoxes[i] = document.getElementsByClassName("insidebox")[i];
-      insideBoxes[i].classList.toggle('circle');
-
+  pizza() {
+    this.pizzaCount++;
+    console.log(this.pizzaCount);
+    if (this.pizzaCount == 3) {
+      let alert = this.alertCtrl.create({
+        title: 'You found the pizza!!',
+        buttons: ['Ok']
+      });
+      alert.present();
+    }
+    if (this.pizzaCount > 3) {
+      let insideBoxes = [];
+      let circle = document.getElementsByClassName("circle").length > 0 || false;
+      console.log(circle);
+      for (let i = 0; i < document.getElementsByClassName("insidebox").length; i++) {
+        insideBoxes[i] = document.getElementsByClassName("insidebox")[i];
+        if (circle) {
+          insideBoxes[i].classList.remove('circle');
+          insideBoxes[i].classList.add('square');
+        } else {
+          insideBoxes[i].classList.remove('square');
+          insideBoxes[i].classList.add('circle');
+        }
+      }
     }
   }
 }
