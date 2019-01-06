@@ -38,14 +38,15 @@
     </ion-grid>
   </div>
   <ion-grid class=" max-550">
+
     <ion-row>
       <ion-col>
-        <button (click)="changeDifficulty()" ion-button block color="primary"> {{arrayDificulties[difficulty]}} </button>
+        <button (click)="playGame()" ion-button block color="primary"> Play </button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <button (click)="playGame()" ion-button block color="primary"> Play </button>
+        <button (click)="changeDifficulty()" ion-button block color="primary"> {{arrayDificulties[difficulty]}} </button>
       </ion-col>
     </ion-row>
     <ion-row>
