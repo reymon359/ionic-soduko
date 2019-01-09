@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
+// import { SocialSharing } from '@ionic-native/social-sharing';
 
 //pages
 import {
@@ -17,6 +18,9 @@ import { UsefulProvider, UserProvider } from '../providers/index.providers';
 import { GameProvider } from '../providers/game/game';
 //storage
 import { IonicStorageModule } from '@ionic/storage';
+// Themes
+import { AppState } from '../app/app.global';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -38,6 +42,8 @@ import { IonicStorageModule } from '@ionic/storage';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     GameProvider, UsefulProvider, UserProvider,
+    AppState
+    // SocialSharing
   ]
 })
 export class AppModule { }

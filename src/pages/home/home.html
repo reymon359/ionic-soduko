@@ -56,15 +56,20 @@
     </ion-row>
     <ion-row>
       <ion-col>
+        <button (click)="changeTheme()" ion-button block color="primary"> Theme </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
         <button [navPush]="creditsPage" ion-button block color="primary"> Credits </button>
       </ion-col>
     </ion-row>
     <ion-row>
-    <ion-col margin-top >
-      <ion-item text-center no-lines> <small>Ramón Morcillo -  @reymon359</small> </ion-item>
-      <ion-item text-center no-lines> <small>v1.0.0 | 2018 - 2019 </small> </ion-item>
-    </ion-col>
-  </ion-row>
+      <ion-col margin-top>
+        <ion-item text-center no-lines> <small>Ramón Morcillo - @reymon359</small> </ion-item>
+        <ion-item text-center no-lines> <small>v1.0.0 | 2018 - 2019 </small> </ion-item>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
   <!--
