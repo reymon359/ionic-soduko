@@ -37,6 +37,8 @@
       </ion-row>
     </ion-grid>
   </div>
+
+
   <ion-grid class=" max-550">
 
     <ion-row>
@@ -55,9 +57,14 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <button (click)="changeTheme()" ion-button block color="primary"> Theme </button>
-      </ion-col>
+      <ion-list>
+        <button  ion-item *ngFor="let theme of themes" (click)="changeTheme(theme.theme)">
+            <ion-avatar  item-start>
+               <img [src]="theme.color"/>
+              </ion-avatar>
+          {{theme.title}}
+        </button>
+      </ion-list>
     </ion-row>
     <ion-row>
       <ion-col>

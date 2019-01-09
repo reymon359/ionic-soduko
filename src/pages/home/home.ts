@@ -6,6 +6,8 @@ import { CreditsPage, GamePage, ProfilePage, RulesPage } from "../index.pages";
 import { GameProvider } from '../../providers/game/game';
 // models
 import { Game } from "../../models/index.models";
+// themes
+import { AppState } from '../../app/app.global';
 
 @Component({
   selector: 'page-home',
@@ -19,13 +21,31 @@ export class HomePage {
 
   difficulty: number = 0; // TODO: Save difficulty chosen in localstorage
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
-  title: string[] = ['','','','','','','','',''];
-  constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController) {
+  title: string[] = ['', '', '', '', '', '', '', '', ''];
+
+  // Themes
+  themes: Array<{ title: string, theme: string, color: string }>;
+
+  constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController,
+    private global: AppState) {
+    this.themes = [
+      { title: 'Default Red', theme: 'theme-red', color: 'assets/imgs/FF0000.png' },
+      { title: 'Noir', theme: 'theme-noir', color: 'assets/imgs/333333.png' },
+      { title: 'Clover', theme: 'theme-clover', color: 'assets/imgs/388E3C.png' },
+      { title: 'Blueberry', theme: 'theme-blueberry', color: 'assets/imgs/1e88e5.png' }
+    ];
   }
 
   ionViewWillEnter() {
     this.coolTitle();
   }
+
+  changeTheme(theme:any){
+     console.log("Now Changing theme to "+ theme);
+     this.global.set('theme', theme);
+   }
+
+
   coolTitle() {
     let titleAux = ['S', 'O', 'D', 'U', 'K', 'O'];
     for (let i = 0; i < 3; i++) {
