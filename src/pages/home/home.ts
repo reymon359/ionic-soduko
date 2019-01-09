@@ -22,17 +22,18 @@ export class HomePage {
   difficulty: number = 0; // TODO: Save difficulty chosen in localstorage
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
   title: string[] = ['', '', '', '', '', '', '', '', ''];
-
   // Themes
-  themes: Array<{ title: string, theme: string, color: string }>;
+  themes: Array<{ title: string, theme: string }>;
+  theme: number = 0;
 
   constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController,
     private global: AppState) {
     this.themes = [
-      { title: 'Default Red', theme: 'theme-red', color: 'assets/imgs/FF0000.png' },
-      { title: 'Noir', theme: 'theme-noir', color: 'assets/imgs/333333.png' },
-      { title: 'Clover', theme: 'theme-clover', color: 'assets/imgs/388E3C.png' },
-      { title: 'Blueberry', theme: 'theme-blueberry', color: 'assets/imgs/1e88e5.png' }
+      { title: 'Default Red', theme: 'theme-red' },
+      { title: 'dark', theme: 'theme-dark' },
+      { title: 'Clover', theme: 'theme-clover' },
+      { title: 'Blueberry', theme: 'theme-blueberry' },
+      { title: 'Normal', theme: 'theme-normal' }
     ];
   }
 
@@ -40,10 +41,12 @@ export class HomePage {
     this.coolTitle();
   }
 
-  changeTheme(theme:any){
-     console.log("Now Changing theme to "+ theme);
-     this.global.set('theme', theme);
-   }
+  changeTheme() {
+    this.theme++;
+    if (this.theme === 5) this.theme = 0;
+    console.log("Now Changing theme to " + this.themes[this.theme].theme);
+    this.global.set('theme', this.themes[this.theme].theme);
+  }
 
 
   coolTitle() {

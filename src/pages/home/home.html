@@ -57,15 +57,10 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-list>
-        <button  ion-item *ngFor="let theme of themes" (click)="changeTheme(theme.theme)">
-            <ion-avatar  item-start>
-               <img [src]="theme.color"/>
-              </ion-avatar>
-          {{theme.title}}
-        </button>
-      </ion-list>
-    </ion-row>
+    <ion-col>
+      <button (click)="changeTheme()" ion-button block color="primary"> {{themes[theme].title}} </button>
+    </ion-col>
+  </ion-row>
     <ion-row>
       <ion-col>
         <button [navPush]="creditsPage" ion-button block color="primary"> Credits </button>

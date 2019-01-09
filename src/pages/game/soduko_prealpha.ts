@@ -301,3 +301,56 @@
 //   document.getElementById('modalButton').focus();
 //
 // }
+// // ----------------------
+// // -----MODAL------------
+// // ----------------------
+//
+// .modal-back {
+//   background-color: rgba(60, 60, 60, .7);
+//   position: absolute;
+//   height: 3000px;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+// }
+//
+// .modal {
+//   font-family: "Roboto", "Helvetica Neue", sans-serif;
+//   position: fixed;
+//   width: 25em;
+//   border-radius: 5px;
+//   top: 15em;
+//   left: 50%;
+//   -webkit-transform: translate(-50%);
+//   transform: translate(-50%);
+//   text-align: center;
+//   background-color: #fff;
+//   padding: 10px;
+//   box-shadow: 0 16px 20px rgba(0,0,0,.4);
+// }
+//
+// .modal > h2 {
+//   margin: 0;
+//   padding: 0.2em 0.2em 0;
+//   color: #000;
+//   font-size: 2rem;
+// }
+//
+// .modal > p {
+//   font-size: 1.5rem;
+// }
+//
+// .modalButton {
+//   color: white;
+//   font-size: 1.5rem;
+//   display: inline-block;
+//   border-radius: 25px;
+//   background-color: darkgrey;
+//   padding: 1rem;
+//   margin: 5px;
+// }
+//
+// .modalButton:hover {
+//   background-color: grey;
+// }

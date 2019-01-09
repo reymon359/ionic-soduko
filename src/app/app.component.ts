@@ -10,15 +10,15 @@ import { AppState } from '../app/app.global';
 })
 export class MyApp {
   rootPage: any = HomePage;
-  themes: Array<{ title: string, theme: string, color: string }>;
+  // themes: Array<{ title: string, theme: string, color: string }>;
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public global:AppState
   ) {
 
      // used for an example of ngFor and navigation
-        this.themes = [
-          { title: 'Default Red Theme', theme: 'theme-red', color:'assets/imgs/FF0000.png' },
-          { title: 'Noir Theme', theme: 'theme-noir', color:'assets/imgs/333333.png' }
-        ];
+        // this.themes = [
+        //   { title: 'Default Red Theme', theme: 'theme-red', color:'assets/imgs/FF0000.png' },
+        //   { title: 'Noir Theme', theme: 'theme-noir', color:'assets/imgs/333333.png' }
+        // ];
 
 
 
