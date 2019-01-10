@@ -25,15 +25,18 @@ export class HomePage {
   // Themes
   themes: Array<{ title: string, theme: string }>;
   theme: number = 0;
+  themeChangedTimes: number = 0;
 
   constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController,
     private global: AppState) {
     this.themes = [
-      { title: 'Default Red', theme: 'theme-red' },
-      { title: 'dark', theme: 'theme-dark' },
-      { title: 'Clover', theme: 'theme-clover' },
-      { title: 'Blueberry', theme: 'theme-blueberry' },
-      { title: 'Normal', theme: 'theme-normal' }
+      { title: 'light', theme: 'theme-light' },
+      { title: 'dark', theme: 'theme-dark' }
+      // ,
+      // { title: 'Clover', theme: 'theme-clover' },
+      // { title: 'Blueberry', theme: 'theme-blueberry' },
+      // { title: 'Default Red', theme: 'theme-red' }
+
     ];
   }
 
@@ -42,10 +45,33 @@ export class HomePage {
   }
 
   changeTheme() {
+    this.themeChangedTimes++;
     this.theme++;
-    if (this.theme === 5) this.theme = 0;
-    console.log("Now Changing theme to " + this.themes[this.theme].theme);
-    this.global.set('theme', this.themes[this.theme].theme);
+    if (this.theme === 2 ) this.theme = 0;
+    if(this.themeChangedTimes < 10){
+      this.global.set('theme', this.themes[this.theme].theme);
+      this.coolTitle();
+    }
+    if (this.themeChangedTimes == 6) {
+      let alert = this.alertCtrl.create({
+        title: 'STOP',
+        message: `Please stop playing with the style or you will break the game`,
+        buttons: ['ok']
+      });
+      alert.present();
+    }
+    if (this.themeChangedTimes == 10) {
+      this.global.set('theme', 'theme-red');
+      let alert = this.alertCtrl.create({
+        title: 'GREAT JOB!',
+        message: `I told you you would break it`,
+        buttons: ['Sorry']
+      });
+      alert.present();
+    }
+// volver a ponerlo normal
+
+
   }
 
 

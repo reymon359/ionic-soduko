@@ -1,0 +1,26 @@
+$primary: #009688;
+$dark: #004d40;
+$light: #80cbc4;
+
+.alert-button {
+  color: $primary!important;
+}
+
+.alert-md {
+  color: $dark;
+}
+
+
+.theme-light {
+  button {
+    background-color: $primary!important;
+  }
+
+  a {
+    color: $primary!important;
+  }
+  .fixed {
+    background-color: $light;
+  }
+
+}
