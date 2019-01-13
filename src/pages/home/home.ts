@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 //pages
 import { CreditsPage, GamePage, ProfilePage, RulesPage } from "../index.pages";
 // Providers
@@ -28,7 +28,7 @@ export class HomePage {
   themeChangedTimes: number = 0;
 
   constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController,
-    private global: AppState) {
+    private global: AppState, public loadingCtrl: LoadingController) {
     this.themes = [
       { title: 'light', theme: 'theme-light' },
       { title: 'dark', theme: 'theme-dark' }
@@ -47,8 +47,8 @@ export class HomePage {
   changeTheme() {
     this.themeChangedTimes++;
     this.theme++;
-    if (this.theme === 2 ) this.theme = 0;
-    if(this.themeChangedTimes < 10){
+    if (this.theme === 2) this.theme = 0;
+    if (this.themeChangedTimes < 10) {
       this.global.set('theme', this.themes[this.theme].theme);
       this.coolTitle();
     }
@@ -69,8 +69,27 @@ export class HomePage {
       });
       alert.present();
     }
-// volver a ponerlo normal
-
+    if (this.themeChangedTimes == 16) {
+      let alert = this.alertCtrl.create({
+        title: 'Wait!',
+        message: `Ok I will try to fix it, just give me some time. And please next time be more carefull.`,
+        buttons: [{
+          text: 'Thank you',
+          handler: () => {
+            let loading = this.loadingCtrl.create({
+              content: 'Please wait...'
+            });
+            loading.present();
+            setTimeout(() => {
+              this.themeChangedTimes = 0;
+              this.global.set('theme', this.themes[this.theme].theme);
+              loading.dismiss();
+            }, 4000);
+          }
+        }]
+      });
+      alert.present();
+    }
 
   }
 
@@ -100,7 +119,6 @@ export class HomePage {
               text: 'Resume',
               handler: () => {
                 this.navCtrl.push(GamePage, { resumeGame: true });
-                // TODO: Resume game
               }
             },
             {

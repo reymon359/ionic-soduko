@@ -28,7 +28,7 @@ export class GamePage {
   boxSelected = [null, null];
   timeRunning: boolean;
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
-  pizzaCount = 0;
+  beerCount = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
     private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
     if (this.navParams.get('resumeGame')) {
@@ -299,16 +299,17 @@ export class GamePage {
     this.gameProv.saveCurrentGame(this.game);
     // }
   }
-  pizza() {
-    this.pizzaCount++;
-    if (this.pizzaCount == 3) {
+  beer() {
+    this.beerCount++;
+    if (this.beerCount == 3) {
       let alert = this.alertCtrl.create({
-        title: 'You found the pizza!!',
+        title: 'You found the beer!!',
+        subTitle:'Drink all you want, its free :D',
         buttons: ['Ok']
       });
       alert.present();
     }
-    if (this.pizzaCount > 3) {
+    if (this.beerCount > 3) {
       let insideBoxes = [];
       let circle = document.getElementsByClassName("circle").length > 0 || false;
       for (let i = 0; i < document.getElementsByClassName("insidebox").length; i++) {
