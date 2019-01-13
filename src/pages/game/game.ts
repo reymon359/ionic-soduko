@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,Platform } from 'ionic-angular';
 // Providers
 import { UsefulProvider, GameProvider } from "../../providers/index.providers";
 // models
@@ -30,14 +30,17 @@ export class GamePage {
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
   beerCount = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
-    private usefulProv: UsefulProvider, public alertCtrl: AlertController) {
+    private usefulProv: UsefulProvider, public alertCtrl: AlertController, public  platform: Platform) {
     if (this.navParams.get('resumeGame')) {
       this.resumeGame();
     } else {
       this.createNewGame();
     }
   }
+  ionViewDidLeave() {
+    this.pauseGame();
 
+  }
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad GamePage');
   // }
@@ -261,6 +264,12 @@ export class GamePage {
   timeController(timeOn) {
     this.timeRunning = timeOn;
     setInterval(() => {
+      // let platform:Platform;
+      // if (this.platform.pause) {
+      //     this.pauseGame();
+      // }else{
+      //   this.timeController(true);
+      // }
       if (this.timeRunning) {
         this.game.time = this.game.time + 1;
       }
@@ -303,7 +312,7 @@ export class GamePage {
     if (this.beerCount == 3) {
       let alert = this.alertCtrl.create({
         title: 'You found the beer!!',
-        subTitle:'Drink all you want, its free :D',
+        subTitle: 'Drink all you want, its free :D',
         buttons: ['Ok']
       });
       alert.present();

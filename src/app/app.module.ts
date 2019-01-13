@@ -20,7 +20,6 @@ import { GameProvider } from '../providers/game/game';
 import { IonicStorageModule } from '@ionic/storage';
 // Themes
 import { AppState } from '../app/app.global';
-
 @NgModule({
   declarations: [
     MyApp,

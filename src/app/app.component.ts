@@ -11,16 +11,17 @@ import { GamePage } from '../pages/game/game';
 import { UsefulProvider, GameProvider } from "../providers/index.providers";
 
 import { AppState } from '../app/app.global';
+
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage: any = HomePage;
-  platform: Platform;
+  // platform: Platform;
   gamePage: GamePage;
   // themes: Array<{ title: string, theme: string, color: string }>;
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public global: AppState,
-    private gameProv: GameProvider, private usefulProv: UsefulProvider,
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public global: AppState
   ) {
 
     // used for an example of ngFor and navigation
@@ -34,24 +35,24 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      if (platform.is('cordova')) {
-
-        //Subscribe on pause
-        this.platform.pause.subscribe(() => {
-          console.log("pause");
-          this.gamePage.timeController(false);
-          this.gamePage.game.state = 'paused';
-          this.gamePage.game.datePaused = this.usefulProv.getDate(new Date());
-          this.gameProv.saveCurrentGame(this.gamePage.game);
-          this.rootPage = HomePage;
-        });
-
-        //Subscribe on resume
-        this.platform.resume.subscribe(() => {
-          window['paused'] = 0;
-          this.rootPage = HomePage;
-        });
-      }
+      // if (platform.is('cordova')) {
+      //
+      //   //Subscribe on pause
+      //   platform.pause.subscribe(() => {
+      //     console.log("pause");
+      //     this.gamePage.timeController(false);
+      //     this.gamePage.game.state = 'paused';
+      //     this.gamePage.game.datePaused = this.usefulProv.getDate(new Date());
+      //     this.gameProv.saveCurrentGame(this.gamePage.game);
+      //     this.rootPage = HomePage;
+      //   });
+      //
+      //   //Subscribe on resume
+      //   platform.resume.subscribe(() => {
+      //     window['paused'] = 0;
+      //     this.rootPage = HomePage;
+      //   });
+      // }
     });
 
   }
