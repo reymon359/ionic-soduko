@@ -36,7 +36,6 @@ export class GamePage {
     } else {
       this.createNewGame();
     }
-    console.log("enters gamepage")
   }
 
   // ionViewDidLoad() {

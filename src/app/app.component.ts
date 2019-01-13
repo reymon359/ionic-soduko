@@ -29,8 +29,8 @@ export class MyApp {
       splashScreen.hide();
     });
   }
-  changeTheme(theme:any){
-    console.log("Now Changing theme to "+ theme);
-    this.global.set('theme', theme);
-  }
+  // changeTheme(theme:any){
+  //   // console.log("Now Changing theme to "+ theme);
+  //   this.global.set('theme', theme);
+  // }
 }
