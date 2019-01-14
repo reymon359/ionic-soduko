@@ -10,7 +10,7 @@
   <!-- <ion-grid class=" max-550"> -->
   <ion-row class=" max-550" justify-content-between>
     <ion-col col-3>
-      <button (click)="pauseGame()" ion-button icon-start navPop left  >
+      <button (click)="pauseGame()" ion-button icon-start navPop left>
         <ion-icon name="md-arrow-round-back"></ion-icon>
         Home
       </button>
@@ -41,24 +41,25 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <button (click)="goBack()" ion-button left icon-only >
-            <ion-icon name="md-undo"></ion-icon>
+          <button (click)="goBack()" ion-button left icon-only>
+            <ion-icon name="undo"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
-          <button (click)="restartBoard()" ion-button icon-only >
-            <ion-icon name="md-refresh"></ion-icon>
+          <button (click)="restartBoard()" ion-button icon-only>
+            <ion-icon name="refresh"></ion-icon>
           </button>
         </ion-col>
-        <!-- <ion-col>
-          <button (click)="beer()" ion-button left icon-only color="dark">
-            <ion-icon name="md-beer"></ion-icon>
+        <ion-col>
+          <button (click)="hint()" ion-button left icon-only>
+            <ion-icon name="eye"></ion-icon>
           </button>
-        </ion-col> -->
+        </ion-col>
+
         <ion-col>
           <ion-item no-lines>
-            <ion-icon  (click)="beer()" name="md-timer" item-end></ion-icon>
-          {{this.game.time}} sec.
+            <ion-icon (click)="beer()" name="md-timer" item-end></ion-icon>
+            {{this.game.time}} sec.
           </ion-item>
         </ion-col>
         <!-- <ion-col>

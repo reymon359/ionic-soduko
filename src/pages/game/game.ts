@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController,Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 // Providers
 import { UsefulProvider, GameProvider } from "../../providers/index.providers";
 // models
@@ -30,7 +30,7 @@ export class GamePage {
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
   beerCount = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
-    private usefulProv: UsefulProvider, public alertCtrl: AlertController, public  platform: Platform) {
+    private usefulProv: UsefulProvider, public alertCtrl: AlertController, public platform: Platform) {
     if (this.navParams.get('resumeGame')) {
       this.resumeGame();
     } else {
@@ -257,7 +257,19 @@ export class GamePage {
     }
   }
 
+  hint() {
+    // If it is not his first position
+    if (this.game.boardHistory.length < 2) {
+      let alert = this.alertCtrl.create({
+        title: 'You cant do that',
+        message: 'You have made no moves yet',
+        buttons: ['Ok']
+      });
+      alert.present();
+    } else {
 
+    }
+  }
   // =================
   // USEFUL FUNCTIONS
   // =================
