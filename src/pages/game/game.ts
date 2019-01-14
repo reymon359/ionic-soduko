@@ -267,7 +267,19 @@ export class GamePage {
       });
       alert.present();
     } else {
-
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
+            console.log(i, j, this.gameBoard[i][j]);
+              let insideBoxWrong = document.getElementById('box-' + i + j);
+              // if (document.getElementsByClassName('wrong').length > 0) {
+              //   document.getElementsByClassName('wrong')[0].classList.remove('wrong');
+              // }
+              insideBoxWrong.classList.add("wrong");
+              // settimeout de 1 sec to quit the class
+          }
+        }
+      }
     }
   }
   // =================

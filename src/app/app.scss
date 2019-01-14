@@ -136,8 +136,18 @@
 .fixed {
   background-color: #80cbc4;
   cursor: context-menu;
+
+}
+.wrong {
+  // background-color:  #f44336;
+  // color: white;
+  animation: wrong 1s ;
 }
 
+@keyframes wrong {
+  from {  background-color: #f44336;color:#fff;}
+  to { background-color: #fff;color:#000}
+}
 .selected {
   border: 1px solid;
 }
