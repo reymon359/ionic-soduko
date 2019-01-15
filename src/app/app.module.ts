@@ -20,6 +20,8 @@ import { GameProvider } from '../providers/game/game';
 import { IonicStorageModule } from '@ionic/storage';
 // Themes
 import { AppState } from '../app/app.global';
+// Pipes
+import { PipesModule } from "../pipes/pipes.module";
 @NgModule({
   declarations: [
     MyApp,
@@ -29,7 +31,8 @@ import { AppState } from '../app/app.global';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
