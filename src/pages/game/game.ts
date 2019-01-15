@@ -214,14 +214,15 @@ export class GamePage {
   }
 
   addRecord() {
-    console.log("entra en recors");
-    if (this.records[this.game.difficulty] === 0) {
-      this.records[this.game.difficulty] = this.game.time;
-      this.gameProv.saveRecords(this.records);
-    }
-    if (this.game.time < this.records[this.game.difficulty]) {
-      this.records[this.game.difficulty] = this.game.time;
-      this.gameProv.saveRecords(this.records);
+    if (!this.usedHint) {
+      if (this.records[this.game.difficulty] === 0) {
+        this.records[this.game.difficulty] = this.game.time;
+        this.gameProv.saveRecords(this.records);
+      }
+      if (this.game.time < this.records[this.game.difficulty]) {
+        this.records[this.game.difficulty] = this.game.time;
+        this.gameProv.saveRecords(this.records);
+      }
     }
   }
 
@@ -293,7 +294,7 @@ export class GamePage {
             {
               text: 'Use clue',
               handler: () => {
-                this.usedHint=true;
+                this.usedHint = true;
                 for (let i = 0; i < 9; i++) {
                   for (let j = 0; j < 9; j++) {
                     if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
@@ -318,7 +319,7 @@ export class GamePage {
           ]
         });
         alert.present();
-      }else{
+      } else {
         for (let i = 0; i < 9; i++) {
           for (let j = 0; j < 9; j++) {
             if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
