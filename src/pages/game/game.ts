@@ -112,10 +112,11 @@ export class GamePage {
   // Now i am going to apply the difficulty chosen in the homepage that ai got with the params.
   // I will go ver the gameBoard positions and deleting x number of values depending on the difficulty.
   applyDifficulty() {
-    // this.gameBoard[0][0] = '';
+    this.gameBoard[0][0] = '';
 
     let min = this.game.difficulty;
-    let max = min + 2;
+    // let max = min + 2;
+    let max = min;
     this.gameBoard.forEach((row) => {
       let toReplace = this.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
       for (let i = 0; i < Math.floor(Math.random() * (max - min + 1) + min); i++) {
@@ -271,12 +272,16 @@ export class GamePage {
         for (let j = 0; j < 9; j++) {
           if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
             console.log(i, j, this.gameBoard[i][j]);
-              let insideBoxWrong = document.getElementById('box-' + i + j);
-              // if (document.getElementsByClassName('wrong').length > 0) {
-              //   document.getElementsByClassName('wrong')[0].classList.remove('wrong');
-              // }
-              insideBoxWrong.classList.add("wrong");
-              // settimeout de 1 sec to quit the class
+            let insideBoxWrong = document.getElementById('box-' + i + j);
+
+            insideBoxWrong.classList.add("wrong");
+            setTimeout(() => {
+              if (document.getElementsByClassName('wrong').length > 0) {
+                for (let i = 0; i < document.getElementsByClassName('wrong').length; i++) {
+                  document.getElementsByClassName('wrong')[i].classList.remove('wrong');
+                }
+              }
+            }, 1600);
           }
         }
       }

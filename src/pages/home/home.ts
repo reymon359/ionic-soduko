@@ -108,7 +108,7 @@ export class HomePage {
   }
   playGame() {
     this.gameProv.loadCurrentGame().then((currentGame: Game) => {
-      if (currentGame == null) {
+      if (currentGame == null || currentGame.dateEnded != null) {
         this.navCtrl.push(GamePage, { difficulty: this.difficulty });
       } else {
         let alert = this.alertCtrl.create({

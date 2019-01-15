@@ -40,26 +40,22 @@
 
     <ion-grid>
       <ion-row>
-        <ion-col>
+        <ion-col col-7>
           <button (click)="goBack()" ion-button left icon-only>
             <ion-icon name="undo"></ion-icon>
           </button>
-        </ion-col>
-        <ion-col>
           <button (click)="restartBoard()" ion-button icon-only>
             <ion-icon name="refresh"></ion-icon>
           </button>
-        </ion-col>
-        <ion-col>
           <button (click)="hint()" ion-button left icon-only>
             <ion-icon name="eye"></ion-icon>
           </button>
         </ion-col>
 
-        <ion-col>
+        <ion-col col-5>
           <ion-item no-lines>
             <ion-icon (click)="beer()" name="md-timer" item-end></ion-icon>
-            {{this.game.time}} sec.
+            {{this.game.time}} s.
           </ion-item>
         </ion-col>
         <!-- <ion-col>
