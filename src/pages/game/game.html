@@ -20,6 +20,16 @@
         {{arrayDificulties[this.game.difficulty]}}
       </ion-item>
     </ion-col>
+    <ion-col col-4 text-right>
+    <ion-item *ngIf="this.records[this.game.difficulty]!=0"text-right no-lines>
+      <ion-icon (click)="beer()" name="trophy" item-end></ion-icon>
+      {{this.records[this.game.difficulty]}} s
+    </ion-item>
+    <ion-item *ngIf="this.records[this.game.difficulty]==0" text-right no-lines>
+      <ion-icon (click)="beer()" name="trophy" item-end></ion-icon>
+      ?? s
+    </ion-item>
+  </ion-col>
   </ion-row>
   <!-- </ion-grid> -->
   <div class=" max-550">

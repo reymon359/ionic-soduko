@@ -21,7 +21,7 @@ export class GamePage {
     boardSolution: [],
     boardHistory: [],
     moves: 0, // not be used
-    time: 0
+    time: 0,
   }
   gameBoard: any[] = [];
   numbers = Array(10).fill(1).map((x, i) => i);
@@ -29,6 +29,8 @@ export class GamePage {
   timeRunning: boolean;
   arrayDificulties: string[] = ['BEGINNER', 'EASY', 'NORMAL', 'HARD', 'EXTREME'];
   beerCount = 0;
+  records: any[] = [0, 0, 0, 0, 0];
+  usedHint: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
     private usefulProv: UsefulProvider, public alertCtrl: AlertController, public platform: Platform) {
     if (this.navParams.get('resumeGame')) {
@@ -39,14 +41,19 @@ export class GamePage {
   }
   ionViewDidLeave() {
     this.pauseGame();
-
   }
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad GamePage');
-  // }
+  ionViewDidLoad() {
+    this.gameProv.loadRecords().then((records: any[]) => {
+      console.log(records);
+      if (records !== null) {
+        this.records = records;
+      }
+    });
+  }
 
   resumeGame() {
     this.gameProv.loadCurrentGame().then((currentGame: Game) => {
+      console.log(currentGame);
       this.game = currentGame;
       let myJSON = JSON.stringify(this.game.boardHistory[this.game.boardHistory.length - 1]);
       let boardAux = JSON.parse(myJSON);
@@ -114,15 +121,14 @@ export class GamePage {
   applyDifficulty() {
     this.gameBoard[0][0] = '';
 
-    let min = this.game.difficulty;
+    // let min = this.game.difficulty;
     // let max = min + 2;
-    let max = min;
-    this.gameBoard.forEach((row) => {
-      let toReplace = this.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
-      for (let i = 0; i < Math.floor(Math.random() * (max - min + 1) + min); i++) {
-        row[toReplace[i]] = '';
-      }
-    })
+    // this.gameBoard.forEach((row) => {
+    //   let toReplace = this.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+    //   for (let i = 0; i < Math.floor(Math.random() * (max - min + 1) + min); i++) {
+    //     row[toReplace[i]] = '';
+    //   }
+    // })
   }
 
   selectBox(row, col) {
@@ -192,6 +198,7 @@ export class GamePage {
     if (win) {
       this.game.dateEnded = this.usefulProv.getDate(new Date());
       this.timeRunning = false;
+      this.addRecord();
       let alert = this.alertCtrl.create({
         title: 'CONGRATULATIONS',
         message: `You just won this ${this.arrayDificulties[this.game.difficulty]} game in ${this.game.time} secs !!`,
@@ -206,7 +213,17 @@ export class GamePage {
     }
   }
 
-
+  addRecord() {
+    console.log("entra en recors");
+    if (this.records[this.game.difficulty] === 0) {
+      this.records[this.game.difficulty] = this.game.time;
+      this.gameProv.saveRecords(this.records);
+    }
+    if (this.game.time < this.records[this.game.difficulty]) {
+      this.records[this.game.difficulty] = this.game.time;
+      this.gameProv.saveRecords(this.records);
+    }
+  }
 
   // Bottom buttons ----------------
 
@@ -268,20 +285,53 @@ export class GamePage {
       });
       alert.present();
     } else {
-      for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
-          if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
-            console.log(i, j, this.gameBoard[i][j]);
-            let insideBoxWrong = document.getElementById('box-' + i + j);
-
-            insideBoxWrong.classList.add("wrong");
-            setTimeout(() => {
-              if (document.getElementsByClassName('wrong').length > 0) {
-                for (let i = 0; i < document.getElementsByClassName('wrong').length; i++) {
-                  document.getElementsByClassName('wrong')[i].classList.remove('wrong');
+      if (!this.usedHint) {
+        let alert = this.alertCtrl.create({
+          title: 'wait',
+          message: 'If you watch your wrong numbers and win, the record will not be registered',
+          buttons: [
+            {
+              text: 'Use clue',
+              handler: () => {
+                this.usedHint=true;
+                for (let i = 0; i < 9; i++) {
+                  for (let j = 0; j < 9; j++) {
+                    if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
+                      let insideBoxWrong = document.getElementById('box-' + i + j);
+                      insideBoxWrong.classList.add("wrong");
+                      setTimeout(() => {
+                        if (document.getElementsByClassName('wrong').length > 0) {
+                          for (let i = 0; i < document.getElementsByClassName('wrong').length; i++) {
+                            document.getElementsByClassName('wrong')[i].classList.remove('wrong');
+                          }
+                        }
+                      }, 1600);
+                    }
+                  }
                 }
               }
-            }, 1600);
+            },
+            {
+              text: 'Dont use',
+              role: 'cancel',
+            }
+          ]
+        });
+        alert.present();
+      }else{
+        for (let i = 0; i < 9; i++) {
+          for (let j = 0; j < 9; j++) {
+            if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
+              let insideBoxWrong = document.getElementById('box-' + i + j);
+              insideBoxWrong.classList.add("wrong");
+              setTimeout(() => {
+                if (document.getElementsByClassName('wrong').length > 0) {
+                  for (let i = 0; i < document.getElementsByClassName('wrong').length; i++) {
+                    document.getElementsByClassName('wrong')[i].classList.remove('wrong');
+                  }
+                }
+              }, 1600);
+            }
           }
         }
       }

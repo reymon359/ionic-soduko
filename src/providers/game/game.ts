@@ -48,5 +48,41 @@ export class GameProvider {
     });
     return promise;
   }
-
+  saveRecords(recordsToSave) {
+    if (this.platform.is("cordova")) {
+      // Mobile
+      this.storage.set('records', recordsToSave);
+    } else {
+      // PC
+      localStorage.setItem('records', JSON.stringify(recordsToSave));
+    }
+  }
+  loadRecords() {
+    let promise = new Promise((resolve, reject) => {
+      if (this.platform.is("cordova")) {
+        // Mobile
+        this.storage.ready()
+          .then(() => {
+            this.storage.get("records")
+              .then(recordsToLoad => {
+                if (recordsToLoad) {
+                  resolve(recordsToLoad);
+                }
+                else {
+                  resolve(null);
+                }
+              })
+          })
+      } else {
+        // PC
+        if (localStorage.getItem("records")) {
+          let recordsToLoad = JSON.parse(window.localStorage.getItem('records'));
+          resolve(recordsToLoad);
+        } else {
+          resolve(null);
+        }
+      }
+    });
+    return promise;
+  }
 }
