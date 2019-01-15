@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams, AlertController, Platform } from '
 import { UsefulProvider, GameProvider } from "../../providers/index.providers";
 // models
 import { Game } from "../../models/index.models";
+// Pages
+import { HomePage } from "../../pages/index.pages";
 
 @IonicPage()
 @Component({
@@ -40,7 +42,11 @@ export class GamePage {
     }
   }
   ionViewDidLeave() {
-    this.pauseGame();
+    console.log("pausing from ");
+    this.timeController(false);
+    this.game.state = 'paused';
+    this.game.datePaused = this.usefulProv.getDate(new Date());
+    this.gameProv.saveCurrentGame(this.game);
   }
   ionViewDidLoad() {
     this.gameProv.loadRecords().then((records: any[]) => {
@@ -119,16 +125,16 @@ export class GamePage {
   // Now i am going to apply the difficulty chosen in the homepage that ai got with the params.
   // I will go ver the gameBoard positions and deleting x number of values depending on the difficulty.
   applyDifficulty() {
-    this.gameBoard[0][0] = '';
+    // this.gameBoard[0][0] = '';
 
-    // let min = this.game.difficulty;
-    // let max = min + 2;
-    // this.gameBoard.forEach((row) => {
-    //   let toReplace = this.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
-    //   for (let i = 0; i < Math.floor(Math.random() * (max - min + 1) + min); i++) {
-    //     row[toReplace[i]] = '';
-    //   }
-    // })
+    let min = this.game.difficulty;
+    let max = min + 2;
+    this.gameBoard.forEach((row) => {
+      let toReplace = this.shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+      for (let i = 0; i < Math.floor(Math.random() * (max - min + 1) + min); i++) {
+        row[toReplace[i]] = '';
+      }
+    })
   }
 
   selectBox(row, col) {
@@ -379,14 +385,31 @@ export class GamePage {
   // OTHERS
   // =================
 
+
   pauseGame() {
+    console.log("pausegame");
+    console.log("pausegame");
+
     // if (this.game.moves > 0) {
     this.timeController(false);
     this.game.state = 'paused';
     this.game.datePaused = this.usefulProv.getDate(new Date());
     this.gameProv.saveCurrentGame(this.game);
+    let alert = this.alertCtrl.create({
+      title: 'Game paused!',
+      subTitle: 'To resume it just press the play button',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }]
+    });
+    alert.present();
     // }
   }
+
   beer() {
     this.beerCount++;
     if (this.beerCount == 3) {
