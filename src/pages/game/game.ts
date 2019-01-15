@@ -33,6 +33,7 @@ export class GamePage {
   beerCount = 0;
   records: any[] = [0, 0, 0, 0, 0];
   usedHint: boolean = false;
+  timesHint: number = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
     private usefulProv: UsefulProvider, public alertCtrl: AlertController, public platform: Platform) {
     if (this.navParams.get('resumeGame')) {
@@ -287,7 +288,7 @@ export class GamePage {
     if (this.game.boardHistory.length < 2) {
       let alert = this.alertCtrl.create({
         title: 'You cant do that',
-        message: 'You have made no moves yet',
+        message: 'You have made no moves yet so there is nothing wrong',
         buttons: ['Ok']
       });
       alert.present();
@@ -301,6 +302,7 @@ export class GamePage {
               text: 'Use clue',
               handler: () => {
                 this.usedHint = true;
+                this.timesHint++;
                 for (let i = 0; i < 9; i++) {
                   for (let j = 0; j < 9; j++) {
                     if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
@@ -326,6 +328,23 @@ export class GamePage {
         });
         alert.present();
       } else {
+        if (this.timesHint === 20) {
+          let alert = this.alertCtrl.create({
+            title: 'Hey',
+            message: 'You already used this 20 times. You should use this if you are really stuck, not all the time. ',
+            buttons: ['Ok']
+          });
+          alert.present();
+        }
+        if (this.timesHint === 40) {
+          let alert = this.alertCtrl.create({
+            title: 'Nice...',
+            message: '50 now',
+            buttons: ['Ok']
+          });
+          alert.present();
+        }
+        this.timesHint++;
         for (let i = 0; i < 9; i++) {
           for (let j = 0; j < 9; j++) {
             if (this.gameBoard[i][j] !== this.game.boardSolution[i][j] && this.gameBoard[i][j] != '') {
