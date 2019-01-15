@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 //pages
 import { CreditsPage, GamePage, ProfilePage, RulesPage } from "../index.pages";
 // Providers
@@ -26,9 +26,9 @@ export class HomePage {
   themes: Array<{ title: string, theme: string }>;
   theme: number = 0;
   themeChangedTimes: number = 0;
-
+  timesTitlePressed: number = 0;
   constructor(public navCtrl: NavController, private gameProv: GameProvider, public alertCtrl: AlertController,
-    private global: AppState, public loadingCtrl: LoadingController) {
+    private global: AppState, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
     this.themes = [
       { title: 'light', theme: 'theme-light' },
       { title: 'dark', theme: 'theme-dark' }
@@ -43,7 +43,25 @@ export class HomePage {
   ionViewWillEnter() {
     this.coolTitle();
   }
-
+  beerClue() {
+    this.timesTitlePressed++;
+    if (this.timesTitlePressed < 10) {
+      const toast = this.toastCtrl.create({
+        message: 'Press me one more time',
+        duration: 1000,
+        position: 'top'
+      });
+      toast.present();
+    }
+    if (this.timesTitlePressed > 10  ) {
+    const toast = this.toastCtrl.create({
+      message: 'Thank you :D .Now you should press the timer, he likes beeing pressed too',
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+  }
   changeTheme() {
     this.themeChangedTimes++;
     this.theme++;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController,ToastController, NavParams, AlertController, Platform } from 'ionic-angular';
 // Providers
 import { UsefulProvider, GameProvider } from "../../providers/index.providers";
 // models
@@ -35,7 +35,8 @@ export class GamePage {
   usedHint: boolean = false;
   timesHint: number = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, private gameProv: GameProvider,
-    private usefulProv: UsefulProvider, public alertCtrl: AlertController, public platform: Platform) {
+    private usefulProv: UsefulProvider, public alertCtrl: AlertController, public platform: Platform,
+  public toastCtrl: ToastController) {
     if (this.navParams.get('resumeGame')) {
       this.resumeGame();
     } else {
@@ -407,26 +408,31 @@ export class GamePage {
 
   pauseGame() {
     console.log("pausegame");
-    console.log("pausegame");
 
-    // if (this.game.moves > 0) {
-    this.timeController(false);
-    this.game.state = 'paused';
-    this.game.datePaused = this.usefulProv.getDate(new Date());
-    this.gameProv.saveCurrentGame(this.game);
-    let alert = this.alertCtrl.create({
-      title: 'Game paused!',
-      subTitle: 'To resume it just press the play button',
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-            this.navCtrl.pop();
-          }
-        }]
-    });
-    alert.present();
-    // }
+    // this.timeController(false);
+    // this.game.state = 'paused';
+    // this.game.datePaused = this.usefulProv.getDate(new Date());
+    // this.gameProv.saveCurrentGame(this.game);
+    const toast = this.toastCtrl.create({
+     message: 'Game paused!, To resume it just press the PLAY button',
+     duration: 6000,
+     showCloseButton:true
+   });
+   toast.present();
+   this.navCtrl.pop();
+
+    // let alert = this.alertCtrl.create({
+    //   title: 'Game paused!',
+    //   subTitle: 'To resume it just press the play button',
+    //   buttons: [
+    //     {
+    //       text: 'Ok',
+    //       handler: () => {
+    //         this.navCtrl.pop();
+    //       }
+    //     }]
+    // });
+    // alert.present();
   }
 
   beer() {
