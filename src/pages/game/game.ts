@@ -440,7 +440,7 @@ export class GamePage {
     if (this.beerCount == 3) {
       let alert = this.alertCtrl.create({
         title: 'You found the beer!!',
-        subTitle: 'Drink all you want, its free :D',
+        subTitle: 'Press me again to drink. Drink all you want, its free :D',
         buttons: ['Ok']
       });
       alert.present();
