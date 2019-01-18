@@ -44,7 +44,6 @@ export class GamePage {
     }
   }
   ionViewDidLeave() {
-    console.log("pausing from ");
     this.timeController(false);
     this.game.state = 'paused';
     this.game.datePaused = this.usefulProv.getDate(new Date());
@@ -52,7 +51,6 @@ export class GamePage {
   }
   ionViewDidLoad() {
     this.gameProv.loadRecords().then((records: any[]) => {
-      console.log(records);
       if (records !== null) {
         this.records = records;
       }
@@ -61,7 +59,6 @@ export class GamePage {
 
   resumeGame() {
     this.gameProv.loadCurrentGame().then((currentGame: Game) => {
-      console.log(currentGame);
       this.game = currentGame;
       let myJSON = JSON.stringify(this.game.boardHistory[this.game.boardHistory.length - 1]);
       let boardAux = JSON.parse(myJSON);
@@ -407,8 +404,6 @@ export class GamePage {
 
 
   pauseGame() {
-    console.log("pausegame");
-
     // this.timeController(false);
     // this.game.state = 'paused';
     // this.game.datePaused = this.usefulProv.getDate(new Date());
