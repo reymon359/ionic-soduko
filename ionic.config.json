@@ -1,7 +1,0 @@
-{
-  "name": "soduko",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
