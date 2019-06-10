@@ -26,7 +26,7 @@ import { PipesModule } from "../pipes/pipes.module";
   declarations: [
     MyApp,
     HomePage
-    // , GamePage, ProfilePage, RulesPage, CreditsPage
+    , GamePage, ProfilePage, RulesPage, CreditsPage
   ],
   imports: [
     BrowserModule,
