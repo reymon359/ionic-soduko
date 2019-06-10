@@ -25,7 +25,8 @@ import { PipesModule } from "../pipes/pipes.module";
 @NgModule({
   declarations: [
     MyApp,
-    HomePage, GamePage, ProfilePage, RulesPage, CreditsPage
+    HomePage
+    // , GamePage, ProfilePage, RulesPage, CreditsPage
   ],
   imports: [
     BrowserModule,
